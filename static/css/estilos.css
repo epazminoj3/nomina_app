@@ -1,0 +1,12 @@
+.tooltip-inner {
+  color: whitesmoke;
+}
+
+.tooltip-arrow::before {
+  background-color: black;
+}
+
+.tooltip-inner {
+  background-color: rgb(93, 93, 148)
+  
+}

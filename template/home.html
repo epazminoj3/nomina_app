@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  {% load static %}
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{title}}</title>
+  <!-- Bootstrap CSS -->
+  <link href={% static 'css/bootstrap.min.css' %} rel="stylesheet">
+  <!-- Font Awesome -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary-color: #2c6ecd;
+      --secondary-color: #19b3b3;
+      --accent-color: #f8f9fa;
+      --dark-color: #212529;
+      --text-color: #495057;
+    }
+    
+    body {
+      font-family: 'Poppins', sans-serif;
+      color: var(--text-color);
+      overflow-x: hidden;
+      
+    }
+    
+    .navbar {
+      box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+      padding: 15px 0;
+    }
+    
+    .navbar-brand {
+      font-weight: 700;
+      color: var(--primary-color);
+      font-size: 1.5rem;
+    }
+    
+    .nav-link {
+      font-weight: 500;
+      color: var(--dark-color);
+      margin: 0 10px;
+      transition: all 0.3s ease;
+    }
+    
+    .nav-link:hover, .nav-link.active {
+      color: var(--primary-color);
+    }
+    
+    .navbar-toggler {
+      border: none;
+      outline: none;
+    }
+    
+    .btn-primary {
+      background-color: var(--primary-color);
+      border-color: var(--primary-color);
+      padding: 10px 25px;
+      border-radius: 50px;
+      font-weight: 500;
+      transition: all 0.3s ease;
+    }
+    
+    .btn-primary:hover {
+      background-color: transparent;
+      color: var(--primary-color);
+      border-color: var(--primary-color);
+    }
+    
+    .btn-outline-primary {
+      border-color: var(--primary-color);
+      color: var(--primary-color);
+      padding: 10px 25px;
+      border-radius: 50px;
+      font-weight: 500;
+      transition: all 0.3s ease;
+    }
+    
+    .btn-outline-primary:hover {
+      background-color: var(--primary-color);
+      color: white;
+    }
+    
+    .hero {
+      background: linear-gradient(135deg, rgba(44, 110, 205, 0.05) 0%, rgba(25, 179, 179, 0.05) 100%);
+      padding: 100px 0;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .hero h1 {
+      font-weight: 700;
+      font-size: 3rem;
+      margin-bottom: 20px;
+      color: var(--dark-color);
+    }
+    
+    .hero p {
+      font-size: 1.2rem;
+      margin-bottom: 30px;
+    }
+    
+    .hero-img {
+      max-width: 100%;
+      animation: float 3s ease-in-out infinite;
+    }
+    
+    @keyframes float {
+      0% { transform: translateY(0px); }
+      50% { transform: translateY(-15px); }
+      100% { transform: translateY(0px); }
+    }
+    
+    .feature-box {
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+      transition: all 0.3s ease;
+      height: 100%;
+      background-color: white;
+    }
+    
+    .feature-box:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+    }
+    
+    .feature-icon {
+      width: 70px;
+      height: 70px;
+      background-color: rgba(44, 110, 205, 0.1);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+      color: var(--primary-color);
+      font-size: 1.5rem;
+    }
+    
+    .feature-title {
+      font-weight: 600;
+      margin-bottom: 15px;
+      color: var(--dark-color);
+    }
+    
+    .testimonial {
+      background-color: white;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+      margin: 20px 10px;
+      height: 100%;
+    }
+    
+    .testimonial-img {
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-right: 15px;
+    }
+    
+    .testimonial-author {
+      font-weight: 600;
+      margin-bottom: 0;
+      color: var(--dark-color);
+    }
+    
+    .testimonial-position {
+      font-size: 0.9rem;
+      color: var(--primary-color);
+    }
+    
+    .app-download {
+      background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+      padding: 80px 0;
+      color: white;
+    }
+    
+    .app-download h2 {
+      font-weight: 700;
+      margin-bottom: 20px;
+    }
+    
+    .download-btn {
+      background-color: white;
+      color: var(--primary-color);
+      padding: 15px 25px;
+      border-radius: 50px;
+      display: inline-flex;
+      align-items: center;
+      margin: 10px;
+      transition: all 0.3s ease;
+      font-weight: 500;
+    }
+    
+    .download-btn:hover {
+      background-color: rgba(255, 255, 255, 0.9);
+      transform: translateY(-5px);
+    }
+    
+    .download-btn i {
+      font-size: 1.5rem;
+      margin-right: 10px;
+    }
+    
+    footer {
+      background-color: var(--dark-color);
+      color: rgba(255, 255, 255, 0.7);
+      padding: 70px 0 20px;
+    }
+    
+    .footer-heading {
+      color: white;
+      font-weight: 600;
+      margin-bottom: 25px;
+    }
+    
+    .footer-link {
+      color: rgba(255, 255, 255, 0.7);
+      margin-bottom: 15px;
+      display: block;
+      transition: all 0.3s ease;
+    }
+    
+    .footer-link:hover {
+      color: white;
+      transform: translateX(5px);
+    }
+    
+    .social-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background-color: rgba(255, 255, 255, 0.1);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 10px;
+      color: white;
+      transition: all 0.3s ease;
+    }
+    
+    .social-icon:hover {
+      background-color: var(--primary-color);
+      transform: translateY(-5px);
+    }
+    
+    .copyright {
+      padding-top: 20px;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      margin-top: 50px;
+    }
+    
+    .floating-btn {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background-color: var(--primary-color);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      z-index: 999;
+      transition: all 0.3s ease;
+    }
+    
+    .floating-btn:hover {
+      background-color: var(--secondary-color);
+      transform: translateY(-5px);
+    }
+    
+    /* Stats section */
+    .stats-card {
+      background-color: white;
+      padding: 25px;
+      border-radius: 10px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+      text-align: center;
+      height: 100%;
+    }
+    
+    .stats-icon {
+      width: 50px;
+      height: 50px;
+      background-color: rgba(44, 110, 205, 0.1);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 15px;
+      color: var(--primary-color);
+      font-size: 1.2rem;
+    }
+    
+    .stats-number {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--dark-color);
+      margin-bottom: 5px;
+    }
+    
+    .stats-text {
+      color: var(--text-color);
+      font-size: 0.9rem;
+    }
+    
+    /* Responsive */
+    @media (max-width: 991.98px) {
+      .hero h1 {
+        font-size: 2.5rem;
+      }
+      
+      .hero-img {
+        margin-top: 50px;
+      }
+    }
+    
+    @media (max-width: 767.98px) {
+      .hero {
+        padding: 70px 0;
+      }
+      
+      .hero h1 {
+        font-size: 2rem;
+      }
+      
+      .hero p {
+        font-size: 1rem;
+      }
+      
+      .feature-box, .testimonial {
+        margin-bottom: 30px;
+      }
+    }
+  </style>
+  {% block extra_css %}{% endblock %}
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-white sticky-top">
+    <div class="container">
+      <a class="navbar-brand" href="#">Table<span class="text-secondary">Nominas</span></a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav mx-auto">
+          <li class="nav-item">
+            <a class="nav-link active" href="#">Inicio</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Cargo</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Departamento</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Tipo contrato</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">empleado</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Rol</a>
+          </li>
+          
+        </ul>
+        <div class="d-flex">
+          <a href="#" class="btn btn-outline-primary me-2">Iniciar Sesión</a>
+          <a href="#" class="btn btn-primary">Registrarse</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Seccion de contenido  -->
+  {% block content %}
+  <section class="hero">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-lg-6">
+          <h1>{{description}}</h1>
+          <p class="text-muted">{{doctores}}</p>
+          <div class="d-flex flex-wrap">
+            <a href="#" class="btn btn-primary me-3 mb-2">Comenzar ahora</a>
+            <a href="#" class="btn btn-outline-primary mb-2">Ver demostración</a>
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <img src={% static 'img/portada.png' %} alt="Doctor App Dashboard" class="hero-img img-fluid">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats Section -->
+  <section class="py-5 bg-light">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-3 col-6 mb-4 mb-md-0">
+          <div class="stats-card">
+            <div class="stats-icon">
+              <i class="fas fa-user-md"></i>
+            </div>
+            <h3 class="stats-number">5,000+</h3>
+            <p class="stats-text">Médicos registrados</p>
+          </div>
+        </div>
+        <div class="col-md-3 col-6 mb-4 mb-md-0">
+          <div class="stats-card">
+            <div class="stats-icon">
+              <i class="fas fa-calendar-check"></i>
+            </div>
+            <h3 class="stats-number">2M+</h3>
+            <p class="stats-text">Citas gestionadas</p>
+          </div>
+        </div>
+        <div class="col-md-3 col-6">
+          <div class="stats-card">
+            <div class="stats-icon">
+              <i class="fas fa-hospital-user"></i>
+            </div>
+            <h3 class="stats-number">500K+</h3>
+            <p class="stats-text">Pacientes atendidos</p>
+          </div>
+        </div>
+        <div class="col-md-3 col-6">
+          <div class="stats-card">
+            <div class="stats-icon">
+              <i class="fas fa-clock"></i>
+            </div>
+            <h3 class="stats-number">98%</h3>
+            <p class="stats-text">Satisfacción</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section class="py-5">
+    <div class="container">
+      <div class="row justify-content-center text-center mb-5">
+        <div class="col-lg-6">
+          <h2 class="fw-bold mb-3">Características principales</h2>
+          <p class="text-muted">Descubra cómo MediConsult Pro puede transformar su práctica médica con funciones diseñadas para profesionales de la salud.</p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-4 col-md-6 mb-4">
+          <div class="feature-box">
+            <div class="feature-icon">
+              <i class="fas fa-calendar-alt"></i>
+            </div>
+            <h4 class="feature-title">Gestión de citas</h4>
+            <p>Programe, reprograme y cancele citas con facilidad. Envío automático de recordatorios a pacientes.</p>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6 mb-4">
+          <div class="feature-box">
+            <div class="feature-icon">
+              <i class="fas fa-file-medical-alt"></i>
+            </div>
+            <h4 class="feature-title">Historial médico digital</h4>
+            <p>Mantenga registros completos de pacientes. Acceda al historial médico, diagnósticos y tratamientos al instante.</p>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6 mb-4">
+          <div class="feature-box">
+            <div class="feature-icon">
+              <i class="fas fa-pills"></i>
+            </div>
+            <h4 class="feature-title">Gestión de medicamentos</h4>
+            <p>Emita recetas electrónicas y haga seguimiento de medicamentos prescritos con alertas automáticas.</p>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6 mb-4">
+          <div class="feature-box">
+            <div class="feature-icon">
+              <i class="fas fa-comments"></i>
+            </div>
+            <h4 class="feature-title">Chat médico seguro</h4>
+            <p>Comuníquese con sus pacientes de forma segura y envíe resultados o indicaciones con total confidencialidad.</p>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6 mb-4">
+          <div class="feature-box">
+            <div class="feature-icon">
+              <i class="fas fa-chart-line"></i>
+            </div>
+            <h4 class="feature-title">Análisis y reportes</h4>
+            <p>Obtenga estadísticas detalladas sobre pacientes, ingresos y tendencias para optimizar su práctica.</p>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6 mb-4">
+          <div class="feature-box">
+            <div class="feature-icon">
+              <i class="fas fa-lock"></i>
+            </div>
+            <h4 class="feature-title">Seguridad avanzada</h4>
+            <p>Protección de datos conforme a normativas sanitarias con cifrado de extremo a extremo.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- App Interface Section -->
+  <section class="py-5 bg-light">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-lg-6 order-lg-2 mb-4 mb-lg-0">
+          <h2 class="fw-bold mb-4">Interfaz intuitiva y fácil de usar</h2>
+          <p class="mb-4">Nuestra aplicación está diseñada pensando en la eficiencia. Con una interfaz clara e intuitiva, podrá gestionar todas las tareas médicas sin complicaciones.</p>
+          <div class="d-flex mb-3">
+            <div class="me-3 text-primary">
+              <i class="fas fa-check-circle fa-2x"></i>
+            </div>
+            <div>
+              <h5>Panel principal personalizable</h5>
+              <p class="text-muted">Adapte la vista según sus necesidades y especialidad médica.</p>
+            </div>
+          </div>
+          <div class="d-flex mb-3">
+            <div class="me-3 text-primary">
+              <i class="fas fa-check-circle fa-2x"></i>
+            </div>
+            <div>
+              <h5>Navegación simplificada</h5>
+              <p class="text-muted">Acceda a todas las funciones con pocos clics para ahorrar tiempo valioso.</p>
+            </div>
+          </div>
+          <div class="d-flex">
+            <div class="me-3 text-primary">
+              <i class="fas fa-check-circle fa-2x"></i>
+            </div>
+            <div>
+              <h5>Compatible con todos los dispositivos</h5>
+              <p class="text-muted">Trabaje desde su computadora, tablet o smartphone sin limitaciones.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6 order-lg-1">
+          <img src="/api/placeholder/600/450" alt="App Interface" class="img-fluid rounded shadow">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials Section -->
+  <section class="py-5">
+    <div class="container">
+      <div class="row justify-content-center text-center mb-5">
+        <div class="col-lg-6">
+          <h2 class="fw-bold mb-3">Lo que dicen nuestros usuarios</h2>
+          <p class="text-muted">Descubra por qué miles de profesionales médicos confían en MediConsult Pro para mejorar su práctica diaria.</p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-4 col-md-6 mb-4">
+          <div class="testimonial">
+            <div class="d-flex align-items-center mb-3">
+              <img src="/api/placeholder/70/70" alt="Doctor" class="testimonial-img">
+              <div>
+                <h5 class="testimonial-author">Dr. Carlos Mendoza</h5>
+                <p class="testimonial-position">Cardiólogo</p>
+              </div>
+            </div>
+            <p class="mb-0">"MediConsult Pro ha revolucionado mi consultorio. Ahora puedo dedicar más tiempo a mis pacientes y menos a tareas administrativas. La función de historial médico digital es excepcional."</p>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6 mb-4">
+          <div class="testimonial">
+            <div class="d-flex align-items-center mb-3">
+              <img src="/api/placeholder/70/70" alt="Doctor" class="testimonial-img">
+              <div>
+                <h5 class="testimonial-author">Dra. Ana Suárez</h5>
+                <p class="testimonial-position">Pediatra</p>
+              </div>
+            </div>
+            <p class="mb-0">"La gestión de citas es impecable y mis pacientes aprecian los recordatorios automáticos. La aplicación móvil me permite verificar información importante incluso fuera del consultorio."</p>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6 mb-4">
+          <div class="testimonial">
+            <div class="d-flex align-items-center mb-3">
+              <img src="/api/placeholder/70/70" alt="Doctor" class="testimonial-img">
+              <div>
+                <h5 class="testimonial-author">Dr. Miguel Estévez</h5>
+                <p class="testimonial-position">Traumatólogo</p>
+              </div>
+            </div>
+            <p class="mb-0">"Los informes analíticos me han permitido comprender mejor el flujo de mi clínica y tomar decisiones basadas en datos. El soporte técnico es excelente y siempre responden rápidamente."</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pricing Section -->
+  <section class="py-5 bg-light">
+    <div class="container">
+      <div class="row justify-content-center text-center mb-5">
+        <div class="col-lg-6">
+          <h2 class="fw-bold mb-3">Planes flexibles para su práctica</h2>
+          <p class="text-muted">Elija el plan que mejor se adapte a sus necesidades y crezca con nosotros.</p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-4 col-md-6 mb-4">
+          <div class="card h-100 border-0 shadow">
+            <div class="card-body text-center p-5">
+              <h5 class="text-uppercase text-muted mb-3">Básico</h5>
+              <h2 class="display-4 fw-bold mb-3">$49</h2>
+              <p class="text-muted mb-4">por mes</p>
+              <ul class="list-unstyled mb-4">
+                <li class="mb-3"><i class="fas fa-check text-primary me-2"></i> Hasta 200 pacientes</li>
+                <li class="mb-3"><i class="fas fa-check text-primary me-2"></i> Gestión de citas</li>
+                <li class="mb-3"><i class="fas fa-check text-primary me-2"></i> Historial médico básico</li>
+                <li class="mb-3"><i class="fas fa-check text-primary me-2"></i> Recordatorios por email</li>
+                <li class="mb-3 text-muted"><i class="fas fa-times me-2"></i> Chat médico</li>
+                <li class="mb-3 text-muted"><i class="fas fa-times me-2"></i> Análisis avanzados</li>
+              </ul>
+              <a href="#" class="btn btn-outline-primary w-100">Seleccionar plan</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6 mb-4">
+          <div class="card h-100 border-0 shadow border-primary" style="transform: scale(1.05);">
+            <div class="card-header bg-primary text-white text-center py-3">
+              <h6 class="mb-0">Recomendado</h6>
+            </div>
+            <div class="card-body text-center p-5">
+              <h5 class="text-uppercase text-muted mb-3">Profesional</h5>
+              <h2 class="display-4 fw-bold mb-3">$99</h2>
+              <p class="text-muted mb-4">por mes</p>
+              <ul class="list-unstyled mb-4">
+                <li class="mb-3"><i class="fas fa-check text-primary me-2"></i> Hasta 500 pacientes</li>
+                <li class="mb-3"><i class="fas fa-check text-primary me-2"></i> Gestión de citas</li>
+                <li class="mb-3"><i class="fas fa-check text-primary me-2"></i> Historial médico completo</li>
+                <li class="mb-3"><i class="fas fa-check text-primary me-2"></i> Recordatorios SMS y email</li>
+                <li class="mb-3"><i class="fas fa-check text-primary me-2"></i> Chat médico</li>
+                <li class="mb-3 text-muted"><i class="fas fa-times me-2"></i> Análisis avanzados</li>
+              </ul>
+              <a href="#" class="btn btn-primary w-100">Seleccionar plan</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6 mb-4">
+          <div class="card h-100 border-0 shadow">
+            <div class="card-body text-center p-5">
+              <h5 class="text-uppercase text-muted mb-3">Empresarial</h5>
+              <h2 class="display-4 fw-bold mb-3">$199</h2>
+              <p class="text-muted mb-4">por mes</p>
+              <ul class="list-unstyled mb-4">
+                <li class="mb-3"><i class="fas fa-check text-primary me-2"></i> Pacientes ilimitados</li>
+                <li class="mb-3"><i class="fas fa-check text-primary me-2"></i> Gestión de citas</li>
+                <li class="mb-3"><i class="fas fa-check text-primary me-2"></i> Historial médico completo</li>
+                <li class="mb-3"><i class="fas fa-check text-primary me-2"></i> Recordatorios personalizados</li>
+                <li class="mb-3"><i class="fas fa-check text-primary me-2"></i> Chat médico</li>
+                <li class="mb-3"><i class="fas fa-check text-primary me-2"></i> Análisis avanzados</li>
+              </ul>
+              <a href="#" class="btn btn-outline-primary w-100">Seleccionar plan</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+ 
+    
+  {% endblock content %}
+  <script src={% static 'js/bootstrap.min.js' %}> </script>
+  <script src={% static 'js/bootstrap.bundle.min.js' %}> </script>
+  {% block extra_js %}{% endblock %}
+</body>
+ 
