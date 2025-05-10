@@ -1,0 +1,220 @@
+{% extends "home.html" %}
+{% block title %}Directorio Médico{% endblock %}
+{% block extra_css %}
+<style>
+    body {
+        background-color: #f8f9fa;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    .navbar {
+        background: linear-gradient(135deg, #0d6efd, #0dcaf0);
+        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+    .card {
+        border-radius: 10px;
+        box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+        transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+    }
+    .btn-primary {
+        background: linear-gradient(135deg, #0d6efd, #0b5ed7);
+        border: none;
+        box-shadow: 0 4px 8px rgba(13, 110, 253, 0.25);
+        transition: all 0.3s;
+    }
+    .btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 12px rgba(13, 110, 253, 0.4);
+    }
+    .btn-secondary {
+        background: linear-gradient(135deg, #6c757d, #5c636a);
+        border: none;
+        box-shadow: 0 4px 8px rgba(108, 117, 125, 0.25);
+        transition: all 0.3s;
+    }
+    .btn-secondary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 12px rgba(108, 117, 125, 0.4);
+    }
+    .page-header {
+        position: relative;
+        margin-bottom: 30px;
+        padding-bottom: 15px;
+    }
+    .page-header:after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 60px;
+        height: 3px;
+        background: linear-gradient(135deg, #0d6efd, #0dcaf0);
+    }
+    .form-control, .form-select {
+        border-radius: 8px;
+        padding: 12px 15px;
+        border: 1px solid #ced4da;
+        transition: all 0.3s;
+    }
+    .form-control:focus, .form-select:focus {
+        box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+        border-color: #86b7fe;
+    }
+    .form-label {
+        font-weight: 500;
+        margin-bottom: 0.5rem;
+        color: #495057;
+    }
+    .input-group-text {
+        background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+        border-radius: 8px 0 0 8px;
+        border: 1px solid #ced4da;
+        border-right: none;
+    }
+    .input-icon {
+        position: absolute;
+        right: 15px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: #6c757d;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+
+<div class="container">
+    <header class="page-header">
+        <h1 class="display-5 fw-bold text-primary">
+            <i class="fas fa-user-md me-2"></i>{{ title }}
+        </h1>
+        <p class="lead text-muted">Registrar profesional médico</p>
+    </header>
+
+    <div class="row">
+        <div class="col-md-8 mx-auto">
+            <div class="card mb-4">
+                <div class="card-body p-4">
+                    <form method="post">
+                        {% csrf_token %}
+                        <!-- {{ form.as_p }} -->
+                        <!-- Nombre -->
+                        <div class="mb-4">
+                            <label for="{{ form.name.id_for_label }}" class="form-label">
+                                <i class="fas fa-user text-primary me-2"></i>{{ form.name.label }}
+                            </label>
+                            {{ form.name }}
+                            {% if form.name.errors %}
+                                <div class="text-danger mt-1">
+                                    {{ form.name.errors }}
+                                </div>
+                            {% endif %}
+                        </div>
+                        
+                        <!-- Especialidad -->
+                        <div class="mb-4">
+                            <label for="{{ form.specialty.id_for_label }}" class="form-label">
+                                <i class="fas fa-stethoscope text-primary me-2"></i>{{ form.specialty.label }}
+                            </label>
+                            {{ form.specialty }}
+                            {% if form.specialty.errors %}
+                                <div class="text-danger mt-1">
+                                    {{ form.specialty.errors }}
+                                </div>
+                            {% endif %}
+                        </div>
+                        
+                        <!-- Honorarios -->
+                        <div class="mb-4">
+                            <label for="{{ form.honararios.id_for_label }}" class="form-label">
+                                <i class="fas fa-dollar-sign text-primary me-2"></i>{{ form.honorarios.label }}
+                            </label>
+                            <div class="input-group">
+                                <span class="input-group-text">$</span>
+                                {{ form.honorarios }}
+                            </div>
+                            <div class="form-text text-muted" id="honorariosHelp">
+                                Ingrese el monto sin el signo de dólar. Ejemplo: 120.00
+                            </div>
+                            {% if form.honorarios.errors %}
+                                <div class="text-danger mt-1">
+                                    {{ form.honorarios.errors }}
+                                </div>
+                            {% endif %}
+                        </div>
+                        
+                        <!-- Teléfono -->
+                        <div class="mb-4">
+                            <label for="{{ form.phone.id_for_label }}" class="form-label">
+                                <i class="fas fa-phone text-primary me-2"></i>{{ form.phone.label }}
+                            </label>
+                            {{ form.phone }}
+                            <div class="form-text text-muted" id="phoneHelp">
+                                Formato: +593 98 765 4321
+                            </div>
+                            {% if form.phone.errors %}
+                                <div class="text-danger mt-1">
+                                    {{ form.phone.errors }}
+                                </div>
+                            {% endif %}
+                        </div>
+                        
+                        <!-- Email -->
+                        <div class="mb-4">
+                            <label for="{{ form.email.id_for_label }}" class="form-label">
+                                <i class="fas fa-envelope text-primary me-2"></i>{{ form.email.label }}
+                            </label>
+                            {{ form.email }}
+                            <div class="form-text text-muted" id="emailHelp">
+                                Correo electrónico de contacto del doctor
+                            </div>
+                            {% if form.email.errors %}
+                                <div class="text-danger mt-1">
+                                    {{ form.email.errors }}
+                                </div>
+                            {% endif %}
+                        </div>
+                        
+                        <!-- Dirección -->
+                        <div class="mb-4">
+                            <label for="{{ form.address.id_for_label }}" class="form-label">
+                                <i class="fas fa-map-marker-alt text-primary me-2"></i>{{ form.address.label }}
+                            </label>
+                            {{ form.address }}
+                            <div class="form-text text-muted" id="addressHelp">
+                                Dirección del consultorio o lugar de trabajo
+                            </div>
+                            {% if form.address.errors %}
+                                <div class="text-danger mt-1">
+                                    {{ form.address.errors }}
+                                </div>
+                            {% endif %}
+                        </div>
+                        
+                        <div class="d-flex justify-content-between mt-4 pt-2">
+                            <a href="{% url 'core:doctor_list' %}" class="btn btn-secondary">
+                                <i class="fas fa-arrow-left me-2"></i>Cancelar
+                            </a>
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-save me-2"></i>Guardar Doctor
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <nav aria-label="breadcrumb" class="mb-4">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'home' %}" class="text-decoration-none">Inicio</a></li>
+            <li class="breadcrumb-item"><a href="{% url 'core:doctor_list' %}" class="text-decoration-none">Doctores</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Nuevo Doctor</li>
+        </ol>
+    </nav>
+</div>
+      
+{% endblock %}
