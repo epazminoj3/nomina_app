@@ -1,0 +1,174 @@
+{% extends "home.html" %}
+
+{% block title %}Lista de Departamentos{% endblock %}
+{% block extra_css %}
+<style>
+        body {
+            background-color: #f8f9fa;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        .navbar {
+            background: linear-gradient(135deg, #0d6efd, #0dcaf0);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        .card {
+            border-radius: 10px;
+            box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, #0d6efd, #0b5ed7);
+            border: none;
+            box-shadow: 0 4px 8px rgba(13, 110, 253, 0.25);
+            transition: all 0.3s;
+        }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(13, 110, 253, 0.4);
+        }
+        .btn-success {
+            background: linear-gradient(135deg, #198754, #157347);
+            border: none;
+            box-shadow: 0 4px 8px rgba(25, 135, 84, 0.25);
+            transition: all 0.3s;
+        }
+        .btn-success:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(25, 135, 84, 0.4);
+        }
+        .btn-danger {
+            background: linear-gradient(135deg, #dc3545, #bb2d3b);
+            border: none;
+            box-shadow: 0 4px 8px rgba(220, 53, 69, 0.25);
+            transition: all 0.3s;
+        }
+        .btn-danger:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(220, 53, 69, 0.4);
+        }
+        .table {
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+        }
+        .table thead {
+            background: linear-gradient(135deg, #6c757d, #495057);
+            color: white;
+        }
+        .table tbody tr {
+            transition: background-color 0.3s;
+        }
+        .table tbody tr:hover {
+            background-color: rgba(13, 110, 253, 0.05);
+        }
+        .page-header {
+            position: relative;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+        }
+        .page-header:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(135deg, #0d6efd, #0dcaf0);
+        }
+        .btn-floating {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            text-align: center;
+            font-size: 24px;
+            line-height: 60px;
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            transition: all 0.3s;
+        }
+        .btn-floating:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 16px rgba(0,0,0,0.3);
+        }
+    </style>
+{% endblock %}
+{% block content %}
+
+    <!-- Contenido principal -->
+    <div class="container">
+        <header class="page-header">
+            <h1 class="display-5 fw-bold text-primary">
+                <i class="fas fa-user-md me-2"></i>Lista de departamentos
+            </h1>
+            <p class="lead text-muted">Listado de departamentos disponibles</p>
+        </header>
+        <form action="" style="max-width: 450px;">
+            <div class="input-group">
+                <input type="text" class="form-control" placeholder="Buscar x departamento..." name="q" value="{{ request.GET.q }}">
+                <button class="btn btn-outline-success" data-bs-toggle="tooltip" data-bs-title="Escriba parte del departamento y click en buscar">
+                    Buscar
+                </button>
+            </div>
+        </form>
+        <!-- Botón para nuevo registro -->
+        <div class="d-flex justify-content-end mb-4">
+            <a class="btn btn-success"  href={% url 'core:departamento_create' %}>
+                <i class="fas fa-plus me-2"></i>Nuevo Departamento
+            </a>
+        </div>
+        <!-- Tabla de Departamentos -->
+        <div class="card mb-4">
+            <div class="card-body p-0">
+                <div class="table-responsive">
+                    <table class="table table-hover mb-0">
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Descripción</th>
+                                <th scope="col" class="text-center">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for departamento in departamentos %}
+                    <tr>
+                        <th scope="row">{{ departamento.id }}</th>
+                        <td>{{ departamento.descripcion }}</td>
+                        <td class="text-center">
+                            <a href="{% url 'core:departamento_update' departamento.id %}" class="btn btn-sm btn-primary me-1">
+                                <i class="fas fa-edit"></i> Editar
+                            </a>
+                            <a href="{% url 'core:departamento_delete' departamento.id %}" class="btn btn-sm btn-danger">
+                                <i class="fas fa-trash-alt"></i> Eliminar
+                            </a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+        <!-- Paginación -->
+        <nav aria-label="Page navigation" class="mb-4">
+            <ul class="pagination justify-content-center">
+                <li class="page-item disabled">
+                    <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Anterior</a>
+                </li>
+                <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                <li class="page-item">
+                    <a class="page-link" href="#">Siguiente</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+{% endblock %}

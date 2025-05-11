@@ -1,5 +1,6 @@
 from django.urls import path
 from core.views import cargo_create, cargo_list,cargo_update,cargo_delete
+from core.views import departamento_create, departamento_list,departamento_update,departamento_delete
 
 app_name = 'core'  # Nombre de la aplicación para el espacio de nombres
 urlpatterns = [
@@ -7,5 +8,11 @@ urlpatterns = [
     path('cargo_create/', cargo_create, name='cargo_create'),  # URL para la vista home
     path('cargo_update/<int:id>', cargo_update, name='cargo_update'),  # URL para la vista home
     path('cargo_delete/<int:id>', cargo_delete, name='cargo_delete'),  # URL para la vista home
+
+    path('departamento_list/', departamento_list, name='departamento_list'),  # URL para la vista home
+    path('departamento_create/', departamento_create, name='departamento_create'),  # URL para la vista home
+    path('departamento_update/<int:id>', departamento_update, name='departamento_update'),  # URL para la vista home
+    path('departamento_delete/<int:id>', departamento_delete, name='departamento_delete'),  # URL para la vista home
+
 
 ]

@@ -1,8 +1,9 @@
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render
 from django.shortcuts import redirect
-from core.models import Cargo
-from core.forms import CargoForm
+from core.models import Cargo, Departamento
+from core.forms import CargoForm, DepartamentoForm
+
 def home(request):
     data = {
         'title': 'App Nominas',
@@ -11,8 +12,11 @@ def home(request):
         'year': 2025,
     }
     
+    
     return render(request, 'home.html', data)
 
+
+## Vista para la lista de cargos
 def cargo_list(request):
     query = request.GET.get('q', None)
     print(query)  # Solo para debug
@@ -67,3 +71,60 @@ def cargo_delete(request,id):
     cargo = Cargo.objects.get(pk=id)
     cargo.delete()
     return redirect('core:cargo_list')
+
+
+## Vista para la lista de departamentos
+def departamento_list(request):
+    query = request.GET.get('q', None)
+    print(query)  # Solo para debug
+    if query:
+        departamentos = Departamento.objects.filter(descripcion__icontains=query)
+    else:
+        departamentos = Departamento.objects.all()
+    context = {'departamentos': departamentos, 'title': 'Listado de departamentos'}
+    return render(request, 'departamento/list.html', context)
+
+
+
+def departamento_create(request):
+    context={'title':'Ingresar Departamento'}
+    print("metodo: ",request.method)
+    if request.method == "GET":
+        # print("entro por get")
+
+        form = DepartamentoForm()# instancia el formulario con los campos vacios
+        context['form'] = form
+        return render(request, 'departamento/create.html', context)
+    else:
+        #  print("entro por post")
+        form = DepartamentoForm(request.POST) # instancia el formulario con los datos del post
+        if form.is_valid():
+            form.save()
+            # cargo = form.save(commit=False)# lo tiene en memoria
+            # cargo.user = request.user
+            # cargo.save() # lo guarda en la BD
+            return redirect('core:departamento_list')
+        else:
+            context['form'] = form
+            return render(request, 'departamento/create.html',context)
+
+def departamento_update(request,id):
+   context={'title':'Actualizar Departamento'}
+   departamento = Departamento.objects.get(pk=id)
+   if request.method == "GET":
+      form = DepartamentoForm(instance=departamento)# instancia el formulario con los datos del departamento
+      context['form'] = form
+      return render(request, 'departamento/create.html', context)
+   else:
+      form = DepartamentoForm(request.POST,instance=departamento)
+      if form.is_valid():
+          form.save()
+          return redirect('core:departamento_list')
+      else:
+          context['form'] = form
+          return render(request, 'departamento/create.html', context)
+
+def departamento_delete(request,id):
+    departamento = Departamento.objects.get(pk=id)
+    departamento.delete()
+    return redirect('core:departamento_list')
