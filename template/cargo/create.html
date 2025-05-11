@@ -1,5 +1,5 @@
 {% extends "home.html" %}
-{% block title %}Directorio Médico{% endblock %}
+{% block title %}Lista de cargos{% endblock %}
 {% block extra_css %}
 <style>
     body {
@@ -91,7 +91,7 @@
         <h1 class="display-5 fw-bold text-primary">
             <i class="fas fa-user-md me-2"></i>{{ title }}
         </h1>
-        <p class="lead text-muted">Registrar profesional médico</p>
+        <p class="lead text-muted">Registrar cargo</p>
     </header>
 
     <div class="row">
@@ -101,105 +101,31 @@
                     <form method="post">
                         {% csrf_token %}
                         <!-- {{ form.as_p }} -->
-                        <!-- Nombre -->
+                        <!-- Descripción -->
                         <div class="mb-4">
-                            <label for="{{ form.name.id_for_label }}" class="form-label">
-                                <i class="fas fa-user text-primary me-2"></i>{{ form.name.label }}
+                            <label for="{{ form.descripcion.id_for_label }}" class="form-label">
+                                <i class="fas fa-briefcase text-primary me-2"></i>{{ form.descripcion.label }}
                             </label>
-                            {{ form.name }}
-                            {% if form.name.errors %}
+                            {{ form.descripcion }}
+                            {% if form.descripcion.errors %}
                                 <div class="text-danger mt-1">
-                                    {{ form.name.errors }}
+                                    {{ form.descripcion.errors }}
                                 </div>
                             {% endif %}
                         </div>
+
                         
-                        <!-- Especialidad -->
-                        <div class="mb-4">
-                            <label for="{{ form.specialty.id_for_label }}" class="form-label">
-                                <i class="fas fa-stethoscope text-primary me-2"></i>{{ form.specialty.label }}
-                            </label>
-                            {{ form.specialty }}
-                            {% if form.specialty.errors %}
-                                <div class="text-danger mt-1">
-                                    {{ form.specialty.errors }}
-                                </div>
-                            {% endif %}
-                        </div>
+        
+                       
                         
-                        <!-- Honorarios -->
-                        <div class="mb-4">
-                            <label for="{{ form.honararios.id_for_label }}" class="form-label">
-                                <i class="fas fa-dollar-sign text-primary me-2"></i>{{ form.honorarios.label }}
-                            </label>
-                            <div class="input-group">
-                                <span class="input-group-text">$</span>
-                                {{ form.honorarios }}
-                            </div>
-                            <div class="form-text text-muted" id="honorariosHelp">
-                                Ingrese el monto sin el signo de dólar. Ejemplo: 120.00
-                            </div>
-                            {% if form.honorarios.errors %}
-                                <div class="text-danger mt-1">
-                                    {{ form.honorarios.errors }}
-                                </div>
-                            {% endif %}
-                        </div>
-                        
-                        <!-- Teléfono -->
-                        <div class="mb-4">
-                            <label for="{{ form.phone.id_for_label }}" class="form-label">
-                                <i class="fas fa-phone text-primary me-2"></i>{{ form.phone.label }}
-                            </label>
-                            {{ form.phone }}
-                            <div class="form-text text-muted" id="phoneHelp">
-                                Formato: +593 98 765 4321
-                            </div>
-                            {% if form.phone.errors %}
-                                <div class="text-danger mt-1">
-                                    {{ form.phone.errors }}
-                                </div>
-                            {% endif %}
-                        </div>
-                        
-                        <!-- Email -->
-                        <div class="mb-4">
-                            <label for="{{ form.email.id_for_label }}" class="form-label">
-                                <i class="fas fa-envelope text-primary me-2"></i>{{ form.email.label }}
-                            </label>
-                            {{ form.email }}
-                            <div class="form-text text-muted" id="emailHelp">
-                                Correo electrónico de contacto del doctor
-                            </div>
-                            {% if form.email.errors %}
-                                <div class="text-danger mt-1">
-                                    {{ form.email.errors }}
-                                </div>
-                            {% endif %}
-                        </div>
-                        
-                        <!-- Dirección -->
-                        <div class="mb-4">
-                            <label for="{{ form.address.id_for_label }}" class="form-label">
-                                <i class="fas fa-map-marker-alt text-primary me-2"></i>{{ form.address.label }}
-                            </label>
-                            {{ form.address }}
-                            <div class="form-text text-muted" id="addressHelp">
-                                Dirección del consultorio o lugar de trabajo
-                            </div>
-                            {% if form.address.errors %}
-                                <div class="text-danger mt-1">
-                                    {{ form.address.errors }}
-                                </div>
-                            {% endif %}
-                        </div>
+
                         
                         <div class="d-flex justify-content-between mt-4 pt-2">
-                            <a href="{% url 'core:doctor_list' %}" class="btn btn-secondary">
+                            <a href="{% url 'core:cargo_list' %}" class="btn btn-secondary">
                                 <i class="fas fa-arrow-left me-2"></i>Cancelar
                             </a>
                             <button type="submit" class="btn btn-primary">
-                                <i class="fas fa-save me-2"></i>Guardar Doctor
+                                <i class="fas fa-save me-2"></i>Guardar Cargo
                             </button>
                         </div>
                     </form>
@@ -211,8 +137,8 @@
     <nav aria-label="breadcrumb" class="mb-4">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="{% url 'home' %}" class="text-decoration-none">Inicio</a></li>
-            <li class="breadcrumb-item"><a href="{% url 'core:doctor_list' %}" class="text-decoration-none">Doctores</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Nuevo Doctor</li>
+            <li class="breadcrumb-item"><a href="{% url 'core:cargo_list' %}" class="text-decoration-none">Cargos</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Nuevo Cargo</li>
         </ol>
     </nav>
 </div>

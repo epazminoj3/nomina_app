@@ -1,6 +1,6 @@
 {% extends "home.html" %}
 
-{% block title %}Directorio Médico{% endblock %}
+{% block title %}Lista de Cargos{% endblock %}
 {% block extra_css %}
 <style>
         body {
@@ -105,26 +105,25 @@
     <div class="container">
         <header class="page-header">
             <h1 class="display-5 fw-bold text-primary">
-                <i class="fas fa-user-md me-2"></i>Directorio de Doctores
+                <i class="fas fa-user-md me-2"></i>Lista de cargos
             </h1>
-            <p class="lead text-muted">Listado de profesionales médicos</p>
+            <p class="lead text-muted">Listado de cargos disponibles</p>
         </header>
         <form action="" style="max-width: 450px;">
             <div class="input-group">
-                <input type="text" class="form-control" placeholder="Buscar x nombre..." name="q" value="{{ request.GET.q }}">
-                <button class="btn btn-outline-success" data-bs-toggle="tooltip" data-bs-title="Escriba parte del apellido y click en buscar">
+                <input type="text" class="form-control" placeholder="Buscar x cargo..." name="q" value="{{ request.GET.q }}">
+                <button class="btn btn-outline-success" data-bs-toggle="tooltip" data-bs-title="Escriba parte del cargo y click en buscar">
                     Buscar
                 </button>
             </div>
         </form>
         <!-- Botón para nuevo registro -->
         <div class="d-flex justify-content-end mb-4">
-            <a class="btn btn-success"  href={% url 'core:doctor_create' %}>
-                <i class="fas fa-plus me-2"></i>Nuevo Doctor
+            <a class="btn btn-success"  href={% url 'core:cargo_create' %}>
+                <i class="fas fa-plus me-2"></i>Nuevo Cargo
             </a>
         </div>
-
-        <!-- Tabla de doctores -->
+        <!-- Tabla de Cargos -->
         <div class="card mb-4">
             <div class="card-body p-0">
                 <div class="table-responsive">
@@ -132,39 +131,30 @@
                         <thead>
                             <tr>
                                 <th scope="col">#</th>
-                                <th scope="col">Nombre</th>
-                                <th scope="col">Especialidad</th>
-                                <th scope="col">Honorarios</th>
-                                <th scope="col">Teléfono</th>
+                                <th scope="col">Descripción</th>
                                 <th scope="col" class="text-center">Acciones</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                           {% for doctor in doctors %} 
-                            <tr>
-                                <th scope="row">{{doctor.id}}</th>
-                                <td>{{doctor.name}}</td>
-                                <td>
-                                    <span class="badge bg-danger">{{doctor.specialty}}</span>
-                                </td>
-                                <td>{{doctor.honorarios}}</td>
-                                <td>{{doctor.phone}}</td>
-                                <td class="text-center">
-                                    <a href={% url 'core:doctor_update' doctor.id %} class="btn btn-sm btn-primary me-1">
-                                        <i class="fas fa-edit"></i> Editar
-                                    </a>
-                                    <a  href={% url 'core:doctor_delete' doctor.id %} class="btn btn-sm btn-danger">
-                                        <i class="fas fa-trash-alt"></i> Eliminar
-                                    </a>
-                                </td>
-                            </tr>
-                           {% endfor %}
-                     
-                        </tbody>
-                    </table>
-                </div>
-            </div>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for cargo in cargos %}
+                    <tr>
+                        <th scope="row">{{ cargo.id }}</th>
+                        <td>{{ cargo.descripcion }}</td>
+                        <td class="text-center">
+                            <a href="{% url 'core:cargo_update' cargo.id %}" class="btn btn-sm btn-primary me-1">
+                                <i class="fas fa-edit"></i> Editar
+                            </a>
+                            <a href="{% url 'core:cargo_delete' cargo.id %}" class="btn btn-sm btn-danger">
+                                <i class="fas fa-trash-alt"></i> Eliminar
+                            </a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
         </div>
+    </div>
+</div>
 
         <!-- Paginación -->
         <nav aria-label="Page navigation" class="mb-4">
