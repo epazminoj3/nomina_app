@@ -1,8 +1,8 @@
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render
 from django.shortcuts import redirect
-from core.models import Cargo, Departamento
-from core.forms import CargoForm, DepartamentoForm
+from core.models import Cargo, Departamento , TipoContrato
+from core.forms import CargoForm, DepartamentoForm, TipoContratoForm
 
 def home(request):
     data = {
@@ -128,3 +128,65 @@ def departamento_delete(request,id):
     departamento = Departamento.objects.get(pk=id)
     departamento.delete()
     return redirect('core:departamento_list')
+
+
+## Vista para la lista de Tipos de Contrato
+def tipoContrato_list(request):
+    query = request.GET.get('q', None)
+    print(query)  # Solo para debug
+    if query:
+        tipoContratos = TipoContrato.objects.filter(descripcion__icontains=query)
+    else:
+        tipoContratos = TipoContrato.objects.all()
+    context = {'tipoContratos': tipoContratos, 'title': 'Listado de Tipos de Contrato'}
+    return render(request, 'tipoContrato/list.html', context)
+
+
+
+def tipoContrato_create(request):
+    context={'title':'Ingresar Tipo de Contrato'}
+    print("metodo: ",request.method)
+    if request.method == "GET":
+        # print("entro por get")
+
+        form = TipoContratoForm()# instancia el formulario con los campos vacios
+        context['form'] = form
+        return render(request, 'tipoContrato/create.html', context)
+    else:
+        #  print("entro por post")
+        form = TipoContratoForm(request.POST) # instancia el formulario con los datos del post
+        if form.is_valid():
+            form.save()
+            # cargo = form.save(commit=False)# lo tiene en memoria
+            # cargo.user = request.user
+            # cargo.save() # lo guarda en la BD
+            return redirect('core:tipoContrato_list')
+        else:
+            context['form'] = form
+            return render(request, 'tipoContrato/create.html',context)
+
+def tipoContrato_update(request,id):
+   context={'title':'Actualizar Tipo de Contrato'}
+   tipoContrato = TipoContrato.objects.get(pk=id)
+   if request.method == "GET":
+      form = TipoContratoForm(instance=tipoContrato)# instancia el formulario con los datos del tipo de contrato
+      context['form'] = form
+      return render(request, 'tipoContrato/create.html', context)
+   else:
+      form = TipoContratoForm(request.POST,instance=tipoContrato)
+      if form.is_valid():
+          form.save()
+          return redirect('core:tipoContrato_list')
+      else:
+          context['form'] = form
+          return render(request, 'tipoContrato/create.html', context)
+
+def tipoContrato_delete(request,id):
+    tipoContrato = TipoContrato.objects.get(pk=id)
+    tipoContrato.delete()
+    return redirect('core:tipoContrato_list')
+
+
+
+
+
