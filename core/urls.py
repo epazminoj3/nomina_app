@@ -18,7 +18,7 @@ urlpatterns = [
     path('cargo_create/', cargo_create, name='cargo_create'),  # URL para la vista home
     path('cargo_update/<int:id>', cargo_update, name='cargo_update'),  # URL para la vista home
     path('cargo_delete/<int:id>', cargo_delete, name='cargo_delete'),  # URL para la vista home
-    
+
     path('departamento_list/', departamento_list, name='departamento_list'),  # URL para la vista home
     path('departamento_create/', departamento_create, name='departamento_create'),  # URL para la vista home
     path('departamento_update/<int:id>', departamento_update, name='departamento_update'),  # URL para la vista home
@@ -38,5 +38,8 @@ urlpatterns = [
     path('rol_create/', rol_create, name='rol_create'),  # URL para la vista home
     path('rol_update/<int:id>', rol_update, name='rol_update'),  # URL para la vista home
     path('rol_delete/<int:id>', rol_delete, name='rol_delete'),  # URL para la vista home
+    
+    
+    
 
 ]

@@ -21,7 +21,7 @@ def home(request):
     data = {
         'title': 'App Nominas',
         'description': 'Nominas de empleados',
-        'author': 'Erick Pazmiño-Maykel Aroca-Justin Sarco',
+        'author': 'Erick Pazmiño-Maykel Aroca',
         'year': 2025,
     }
     return render(request, 'home.html', data)

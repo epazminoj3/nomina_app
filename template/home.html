@@ -426,15 +426,10 @@
       <div class="row align-items-center">
         <div class="col-lg-6">
           <h1>{{description}}</h1>
-          <p class="text-muted">{{Nominas}}</p>
+          <p class="text-muted">{{doctores}}</p>
           <div class="d-flex flex-wrap">
-            {% if user.is_authenticated %}
+            <a href="#" class="btn btn-primary me-3 mb-2">Comenzar ahora</a>
             <a href="#" class="btn btn-outline-primary mb-2">Ver demostración</a>
-            
-            {% else %}
-            <a href="{% url 'core:signin' %}" class="btn btn-primary me-3 mb-2">Comenzar ahora</a>
-            {% endif %}
-
           </div>
         </div>
         <div class="col-lg-6">
