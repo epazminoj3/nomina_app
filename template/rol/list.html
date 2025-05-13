@@ -1,0 +1,263 @@
+{% extends "home.html" %}
+
+{% block title %}Lista de roles de Pago{% endblock %}
+
+{% block extra_css %}
+<style>
+    body {
+        background-color: #f8f9fa;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    .navbar {
+        background: linear-gradient(135deg, #0d6efd, #0dcaf0);
+        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+    .card {
+        border-radius: 10px;
+        box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+        transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+    }
+    .btn-primary {
+        background: linear-gradient(135deg, #0d6efd, #0b5ed7);
+        border: none;
+        box-shadow: 0 4px 8px rgba(13, 110, 253, 0.25);
+        transition: all 0.3s;
+    }
+    .btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 12px rgba(13, 110, 253, 0.4);
+    }
+    .btn-success {
+        background: linear-gradient(135deg, #198754, #157347);
+        border: none;
+        box-shadow: 0 4px 8px rgba(25, 135, 84, 0.25);
+        transition: all 0.3s;
+    }
+    .btn-success:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 12px rgba(25, 135, 84, 0.4);
+    }
+    .btn-danger {
+        background: linear-gradient(135deg, #dc3545, #bb2d3b);
+        border: none;
+        box-shadow: 0 4px 8px rgba(220, 53, 69, 0.25);
+        transition: all 0.3s;
+    }
+    .btn-danger:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 12px rgba(220, 53, 69, 0.4);
+    }
+    .table {
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+    }
+    .table thead {
+        background: linear-gradient(135deg, #6c757d, #495057);
+        color: white;
+    }
+    .table tbody tr {
+        transition: background-color 0.3s;
+    }
+    .table tbody tr:hover {
+        background-color: rgba(13, 110, 253, 0.05);
+    }
+    .page-header {
+        position: relative;
+        margin-bottom: 30px;
+        padding-bottom: 15px;
+    }
+    .page-header:after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 60px;
+        height: 3px;
+        background: linear-gradient(135deg, #0d6efd, #0dcaf0);
+    }
+    .filter-form .form-control, .filter-form .form-select {
+        height: calc(2.5rem + 2px);
+        font-size: 0.9rem;
+    }
+    .filter-form label {
+        font-size: 0.85rem;
+        font-weight: 500;
+        margin-bottom: 0.25rem;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <header class="page-header">
+        <h1 class="display-5 fw-bold text-primary">
+            <i class="fas fa-file-invoice-dollar me-2"></i>Lista de roles de pago
+        </h1>
+        <p class="lead text-muted">Listado completo de roles de pago registrados</p>
+    </header>
+
+    <!-- Formulario de Búsqueda Avanzada -->
+    <form method="GET" class="mb-4 filter-form">
+        <div class="row g-3">
+            <div class="col-md-3">
+                <label for="empleado" class="form-label">Empleado</label>
+                <input type="text" class="form-control" id="empleado" name="empleado" 
+                       value="{{ request.GET.empleado }}" placeholder="Buscar empleado..." list="empleadosList">
+                <datalist id="empleadosList">
+                    {% for empleado in empleados %}
+                    <option value="{{ empleado.nombres }}">
+                    {% endfor %}
+                </datalist>
+            </div>
+            <div class="col-md-2">
+                <label for="aniomes" class="form-label">Año-Mes</label>
+                <input type="text" class="form-control" id="aniomes" name="aniomes" 
+                       value="{{ request.GET.aniomes }}" placeholder="YYYY-MM">
+            </div>
+            <div class="col-md-2">
+                <label for="neto_min" class="form-label">Neto mínimo</label>
+                <input type="number" step="0.01" class="form-control" id="neto_min" name="neto_min" 
+                       value="{{ request.GET.neto_min }}" placeholder="Mínimo">
+            </div>
+            <div class="col-md-2">
+                <label for="neto_max" class="form-label">Neto máximo</label>
+                <input type="number" step="0.01" class="form-control" id="neto_max" name="neto_max" 
+                       value="{{ request.GET.neto_max }}" placeholder="Máximo">
+            </div>
+            <div class="col-md-3 d-flex align-items-end">
+                <button type="submit" class="btn btn-primary me-2">
+                    <i class="fas fa-search me-1"></i> Buscar
+                </button>
+                <a href="{% url 'core:rol_list' %}" class="btn btn-outline-secondary">
+                    <i class="fas fa-sync-alt me-1"></i> Limpiar
+                </a>
+            </div>
+        </div>
+    </form>
+
+    <!-- Botón para nuevo registro -->
+    <div class="d-flex justify-content-between mb-4">
+        <div class="d-flex align-items-center">
+            <span class="badge bg-primary rounded-pill me-2">
+                {{ roles.paginator.count }} registros
+            </span>
+            {% if request.GET %}
+            <span class="text-muted small">
+                Filtros aplicados
+            </span>
+            {% endif %}
+        </div>
+        <a class="btn btn-success" href="{% url 'core:rol_create' %}">
+            <i class="fas fa-plus-circle me-2"></i>Nuevo Rol
+        </a>
+    </div>
+
+    <!-- Tabla de Roles -->
+    <div class="card mb-4">
+        <div class="card-body p-0">
+            <div class="table-responsive">
+                <table class="table table-hover mb-0">
+                    <thead>
+                        <tr>
+                            <th scope="col">ID</th>
+                            <th scope="col">Empleado</th>
+                            <th scope="col">Periodo</th>
+                            <th scope="col">Sueldo</th>
+                            <th scope="col">Horas Extra</th>
+                            <th scope="col">Bono</th>
+                            <th scope="col">IESS</th>
+                            <th scope="col">Total Ing.</th>
+                            <th scope="col">Total Des.</th>
+                            <th scope="col">Neto</th>
+                            <th scope="col" class="text-center">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for rol in roles %}
+                        <tr>
+                            <th scope="row">{{ rol.id }}</th>
+                            <td>{{ rol.empleado.nombres }}</td>
+                            <td>{{ rol.aniomes|date:"Y-m" }}</td>
+                            <td>${{ rol.sueldo|floatformat:2 }}</td>
+                            <td>{{ rol.horas_extras|floatformat:2 }}</td>
+                            <td>${{ rol.bono|floatformat:2 }}</td>
+                            <td>${{ rol.iess|floatformat:2 }}</td>
+                            <td>${{ rol.tot_ing|floatformat:2 }}</td>
+                            <td>${{ rol.tot_des|floatformat:2 }}</td>
+                            <td><strong>${{ rol.neto|floatformat:2 }}</strong></td>
+                            <td class="text-center">
+                                <a href="{% url 'core:rol_update' rol.id %}" class="btn btn-sm btn-primary me-1" title="Editar">
+                                    <i class="fas fa-edit"></i>
+                                </a>
+                                <a href="{% url 'core:rol_delete' rol.id %}" class="btn btn-sm btn-danger" title="Eliminar">
+                                    <i class="fas fa-trash-alt"></i>
+                                </a>
+                            </td>
+                        </tr>
+                        {% empty %}
+                        <tr>
+                            <td colspan="11" class="text-center text-muted py-4">
+                                No se encontraron roles con los criterios actuales
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Paginación -->
+    {% if roles.has_other_pages %}
+    <nav aria-label="Page navigation" class="mb-4">
+        <ul class="pagination justify-content-center">
+            {% if roles.has_previous %}
+                <li class="page-item">
+                    <a class="page-link" 
+                       href="?page={{ roles.previous_page_number }}{% if request.GET.empleado %}&empleado={{ request.GET.empleado }}{% endif %}{% if request.GET.aniomes %}&aniomes={{ request.GET.aniomes }}{% endif %}{% if request.GET.neto_min %}&neto_min={{ request.GET.neto_min }}{% endif %}{% if request.GET.neto_max %}&neto_max={{ request.GET.neto_max }}{% endif %}" 
+                       aria-label="Anterior">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+            {% else %}
+                <li class="page-item disabled">
+                    <span class="page-link" aria-hidden="true">&laquo;</span>
+                </li>
+            {% endif %}
+
+            {% for i in roles.paginator.page_range %}
+                {% if roles.number == i %}
+                    <li class="page-item active"><span class="page-link">{{ i }}</span></li>
+                {% else %}
+                    <li class="page-item">
+                        <a class="page-link" 
+                           href="?page={{ i }}{% if request.GET.empleado %}&empleado={{ request.GET.empleado }}{% endif %}{% if request.GET.aniomes %}&aniomes={{ request.GET.aniomes }}{% endif %}{% if request.GET.neto_min %}&neto_min={{ request.GET.neto_min }}{% endif %}{% if request.GET.neto_max %}&neto_max={{ request.GET.neto_max }}{% endif %}">
+                            {{ i }}
+                        </a>
+                    </li>
+                {% endif %}
+            {% endfor %}
+
+            {% if roles.has_next %}
+                <li class="page-item">
+                    <a class="page-link" 
+                       href="?page={{ roles.next_page_number }}{% if request.GET.empleado %}&empleado={{ request.GET.empleado }}{% endif %}{% if request.GET.aniomes %}&aniomes={{ request.GET.aniomes }}{% endif %}{% if request.GET.neto_min %}&neto_min={{ request.GET.neto_min }}{% endif %}{% if request.GET.neto_max %}&neto_max={{ request.GET.neto_max }}{% endif %}" 
+                       aria-label="Siguiente">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+            {% else %}
+                <li class="page-item disabled">
+                    <span class="page-link" aria-hidden="true">&raquo;</span>
+                </li>
+            {% endif %}
+        </ul>
+    </nav>
+    {% endif %}
+</div>
+{% endblock %}

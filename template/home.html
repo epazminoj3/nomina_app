@@ -341,6 +341,26 @@
         margin-bottom: 30px;
       }
     }
+.alert {
+    padding: 1rem 1.5rem;
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
+    font-weight: 600;
+    font-size: 1rem;
+}
+
+.alert-success {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+.alert-error, .alert-danger {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
   </style>
   {% block extra_css %}{% endblock %}
 </head>
@@ -367,16 +387,21 @@
             <a class="nav-link" href="{% url 'core:tipoContrato_list' %}">Tipo contrato</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">empleado</a>
+            <a class="nav-link" href="{% url 'core:empleado_list' %}">Empleado</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Rol</a>
+            <a class="nav-link" href="{% url 'core:rol_list' %}">Roles de Pago</a>
           </li>
-          
+
+
         </ul>
         <div class="d-flex">
-          <a href="#" class="btn btn-outline-primary me-2">Iniciar Sesión</a>
-          <a href="#" class="btn btn-primary">Registrarse</a>
+          {% if user.is_authenticated %}
+          <a href="{% url 'core:logout' %}" class="btn btn-outline-primary me-2">Cerrar Sesión</a>
+          {% else %}
+          <a href="{% url 'core:signup' %}" class="btn btn-primary">Registrarse</a>
+          <a href="{% url 'core:signin' %}" class="btn btn-outline-primary me-2">Iniciar Sesión</a>
+          {% endif %}
         </div>
       </div>
     </div>
@@ -384,15 +409,32 @@
 
   <!-- Seccion de contenido  -->
   {% block content %}
+
+  {% if messages %}
+  <div class="container" style="max-width: 800px; margin: 1rem auto;">
+    {% for message in messages %}
+      <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}">
+        {{ message }}
+      </div>
+    {% endfor %}
+  </div>
+{% endif %}
+
+
   <section class="hero">
     <div class="container">
       <div class="row align-items-center">
         <div class="col-lg-6">
           <h1>{{description}}</h1>
-          <p class="text-muted">{{doctores}}</p>
+          <p class="text-muted">{{Nominas}}</p>
           <div class="d-flex flex-wrap">
-            <a href="#" class="btn btn-primary me-3 mb-2">Comenzar ahora</a>
+            {% if user.is_authenticated %}
             <a href="#" class="btn btn-outline-primary mb-2">Ver demostración</a>
+            
+            {% else %}
+            <a href="{% url 'core:signin' %}" class="btn btn-primary me-3 mb-2">Comenzar ahora</a>
+            {% endif %}
+
           </div>
         </div>
         <div class="col-lg-6">

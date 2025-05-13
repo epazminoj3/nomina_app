@@ -20,8 +20,9 @@ from django.urls import include, path
 from django.conf.urls.static import static
 from core.views import home
 
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', home, name='home'),  # URL for the home view
-    path('nomina/', include('core.urls',namespace='core'))
+    path('nomina/', include('core.urls',namespace='core')),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

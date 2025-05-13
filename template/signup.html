@@ -1,0 +1,219 @@
+{% extends "home.html" %}
+
+{% block title %}Registro de Usuario | TableNominas{% endblock %}
+
+{% block extra_css %}
+<style>
+    .registration-container {
+        max-width: 600px;
+        margin: 3rem auto;
+        padding: 2.5rem;
+        background: white;
+        border-radius: 12px;
+        box-shadow: 0 10px 30px rgba(44, 110, 205, 0.1);
+    }
+    
+    .registration-header {
+        text-align: center;
+        margin-bottom: 2.5rem;
+    }
+    
+    .registration-header h2 {
+        color: #2c6ecd;
+        font-weight: 700;
+        margin-bottom: 0.5rem;
+    }
+    
+    .registration-header p {
+        color: #6c757d;
+        font-size: 1.1rem;
+    }
+    
+    .form-group {
+        margin-bottom: 1.75rem;
+    }
+    
+    .form-group label {
+        display: block;
+        margin-bottom: 0.75rem;
+        font-weight: 600;
+        color: #495057;
+        font-size: 1rem;
+    }
+    
+    .form-control {
+        width: 100%;
+        padding: 0.875rem 1.25rem;
+        border: 1px solid #dee2e6;
+        border-radius: 8px;
+        font-size: 1rem;
+        transition: all 0.3s ease;
+        background-color: #f8f9fa;
+    }
+    
+    .form-control:focus {
+        border-color: #2c6ecd;
+        box-shadow: 0 0 0 0.25rem rgba(44, 110, 205, 0.25);
+        background-color: white;
+    }
+    
+    .btn-register {
+        width: 100%;
+        padding: 1rem;
+        background: linear-gradient(135deg, #2c6ecd, #19b3b3);
+        color: white;
+        border: none;
+        border-radius: 8px;
+        font-size: 1.1rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        margin-top: 1rem;
+    }
+    
+    .btn-register:hover {
+        background: linear-gradient(135deg, #255db7, #159898);
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(44, 110, 205, 0.3);
+    }
+    
+    .login-link {
+        text-align: center;
+        margin-top: 2rem;
+        color: #6c757d;
+        font-size: 1rem;
+    }
+    
+    .login-link a {
+        color: #2c6ecd;
+        font-weight: 600;
+        text-decoration: none;
+        transition: all 0.3s ease;
+    }
+    
+    .login-link a:hover {
+        color: #19b3b3;
+        text-decoration: underline;
+    }
+    
+    .error-message {
+        color: #e74c3c;
+        font-size: 0.875rem;
+        margin-top: 0.5rem;
+        display: flex;
+        align-items: center;
+    }
+    
+    .error-message i {
+        margin-right: 0.5rem;
+    }
+    
+    .form-icon {
+        position: absolute;
+        left: 1.25rem;
+        top: 50%;
+        transform: translateY(-50%);
+        color: #6c757d;
+    }
+    
+    .input-with-icon {
+        position: relative;
+    }
+    
+    .input-with-icon input {
+        padding-left: 3rem;
+    }
+    
+    /* Responsive */
+    @media (max-width: 767.98px) {
+        .registration-container {
+            padding: 1.5rem;
+            margin: 1.5rem auto;
+        }
+        
+        .registration-header h2 {
+            font-size: 1.75rem;
+        }
+    }
+.alert {
+    padding: 1rem 1.5rem;
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
+    font-weight: 600;
+    font-size: 1rem;
+}
+
+.alert-success {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+.alert-error, .alert-danger {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="registration-container">
+    <div class="registration-header">
+        <h2><i class="fas fa-user-plus"></i> Crear Cuenta</h2>
+        <p>Regístrese para acceder al sistema de gestión de nóminas</p>
+    </div>
+    {% if messages %}
+    {% for message in messages %}
+        <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}">
+            {{ message }}
+        </div>
+    {% endfor %}
+{% endif %}
+    <form method="POST" action="{% url 'core:signup' %}">
+        {% csrf_token %}
+        
+        {% for field in form %}
+        <div class="form-group">
+            <label for="{{ field.id_for_label }}">
+                {{ field.label }}
+            </label>
+            
+            <div class="input-with-icon">
+                {% if field.name == 'username' %}
+                    <i class="fas fa-user form-icon"></i>
+                {% elif field.name == 'email' %}
+                    <i class="fas fa-envelope form-icon"></i>
+                {% elif field.name == 'password1' or field.name == 'password2' %}
+                    <i class="fas fa-lock form-icon"></i>
+                {% endif %}
+                
+                {{ field }}
+            </div>
+            
+            {% if field.errors %}
+                <div class="error-message">
+                    <i class="fas fa-exclamation-circle"></i>
+                    {% for error in field.errors %}
+                        {{ error }}
+                    {% endfor %}
+                </div>
+            {% endif %}
+            
+            {% if field.help_text %}
+                <small class="text-muted">{{ field.help_text }}</small>
+            {% endif %}
+        </div>
+        {% endfor %}
+        
+        <button type="submit" class="btn-register">
+            <i class="fas fa-user-plus"></i> Registrarse
+        </button>
+    </form>
+    
+    <div class="login-link">
+        ¿Ya tienes una cuenta? <a href="{% url 'core:signin' %}"><i class="fas fa-sign-in-alt"></i> Iniciar Sesión</a>
+    </div>
+</div>
+{% endblock %}

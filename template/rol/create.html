@@ -1,0 +1,196 @@
+{% extends "home.html" %}
+{% block title %}Lista de Roles de Pago{% endblock %}
+
+{% block extra_css %}
+<style>
+    /* [Estilos permanecen igual] */
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <header class="page-header">
+        <h1 class="display-5 fw-bold text-primary">
+            <i class="fas fa-user-tag me-2"></i>{{ title }}
+        </h1>
+        <p class="lead text-muted">Registrar Rol</p>
+    </header>
+
+    <div class="row">
+        <div class="col-md-8 mx-auto">
+            <div class="card mb-4">
+                <div class="card-body p-4">
+                    <form method="post">
+                        {% csrf_token %}
+
+                        <!-- Empleado -->
+                        <div class="mb-4">
+                            <label for="id_empleado" class="form-label">
+                                <i class="fas fa-user text-primary me-2"></i>Empleado
+                            </label>
+                            <select name="empleado" id="id_empleado" class="form-control">
+                                {% for empleado in form.fields.empleado.queryset %}
+                                    <option value="{{ empleado.id }}" data-sueldo="{{ empleado.sueldo }}">{{ empleado.nombres }}</option>
+                                {% endfor %}
+                            </select>
+                            {% if form.empleado.errors %}
+                                <div class="text-danger mt-1">{{ form.empleado.errors }}</div>
+                            {% endif %}
+                        </div>
+
+                        <!-- Año/Mes -->
+                        <div class="mb-4">
+                            <label for="{{ form.aniomes.id_for_label }}" class="form-label">
+                                <i class="fas fa-calendar text-primary me-2"></i>{{ form.aniomes.label }}
+                            </label>
+                            {{ form.aniomes }}
+                            {% if form.aniomes.errors %}
+                                <div class="text-danger mt-1">{{ form.aniomes.errors }}</div>
+                            {% endif %}
+                        </div>
+
+                        <!-- Sueldo -->
+                        <div class="mb-4">
+                            <label for="{{ form.sueldo.id_for_label }}" class="form-label">
+                                <i class="fas fa-money-bill-wave text-primary me-2"></i>{{ form.sueldo.label }}
+                            </label>
+                            {{ form.sueldo }}
+                            {% if form.sueldo.errors %}
+                                <div class="text-danger mt-1">{{ form.sueldo.errors }}</div>
+                            {% endif %}
+                        </div>
+
+                        <!-- Horas Extras -->
+                        <div class="mb-4">
+                            <label for="{{ form.horas_extras.id_for_label }}" class="form-label">
+                                <i class="fas fa-clock text-primary me-2"></i>{{ form.horas_extras.label }}
+                            </label>
+                            {{ form.horas_extras }}
+                            {% if form.horas_extras.errors %}
+                                <div class="text-danger mt-1">{{ form.horas_extras.errors }}</div>
+                            {% endif %}
+                        </div>
+
+                        <!-- Bono -->
+                        <div class="mb-4">
+                            <label for="{{ form.bono.id_for_label }}" class="form-label">
+                                <i class="fas fa-gift text-primary me-2"></i>{{ form.bono.label }}
+                            </label>
+                            {{ form.bono }}
+                            {% if form.bono.errors %}
+                                <div class="text-danger mt-1">{{ form.bono.errors }}</div>
+                            {% endif %}
+                        </div>
+
+                        <!-- IESS -->
+                        <div class="mb-4">
+                            <label for="{{ form.iess.id_for_label }}" class="form-label">
+                                <i class="fas fa-shield-alt text-primary me-2"></i>{{ form.iess.label }}
+                            </label>
+                            {{ form.iess }}
+                            {% if form.iess.errors %}
+                                <div class="text-danger mt-1">{{ form.iess.errors }}</div>
+                            {% endif %}
+                        </div>
+
+                        <!-- Total Ingresos -->
+                        <div class="mb-4">
+                            <label for="{{ form.tot_ing.id_for_label }}" class="form-label">
+                                <i class="fas fa-plus-circle text-primary me-2"></i>{{ form.tot_ing.label }}
+                            </label>
+                            {{ form.tot_ing }}
+                            {% if form.tot_ing.errors %}
+                                <div class="text-danger mt-1">{{ form.tot_ing.errors }}</div>
+                            {% endif %}
+                        </div>
+
+                        <!-- Total Descuentos -->
+                        <div class="mb-4">
+                            <label for="{{ form.tot_des.id_for_label }}" class="form-label">
+                                <i class="fas fa-minus-circle text-primary me-2"></i>{{ form.tot_des.label }}
+                            </label>
+                            {{ form.tot_des }}
+                            {% if form.tot_des.errors %}
+                                <div class="text-danger mt-1">{{ form.tot_des.errors }}</div>
+                            {% endif %}
+                        </div>
+
+                        <!-- Neto -->
+                        <div class="mb-4">
+                            <label for="{{ form.neto.id_for_label }}" class="form-label">
+                                <i class="fas fa-wallet text-primary me-2"></i>{{ form.neto.label }}
+                            </label>
+                            {{ form.neto }}
+                            {% if form.neto.errors %}
+                                <div class="text-danger mt-1">{{ form.neto.errors }}</div>
+                            {% endif %}
+                        </div>
+
+                        <div class="d-flex justify-content-between mt-4 pt-2">
+                            <a href="{% url 'core:rol_list' %}" class="btn btn-secondary">
+                                <i class="fas fa-arrow-left me-2"></i>Cancelar
+                            </a>
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-save me-2"></i>Guardar Rol
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <nav aria-label="breadcrumb" class="mb-4">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'home' %}" class="text-decoration-none">Inicio</a></li>
+            <li class="breadcrumb-item"><a href="{% url 'core:rol_list' %}" class="text-decoration-none">Roles</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Nuevo Rol</li>
+        </ol>
+    </nav>
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const empleadoSelect = document.getElementById("id_empleado");
+    const sueldo = document.getElementById("id_sueldo");
+    const horas_extras = document.getElementById("id_horas_extras");
+    const bono = document.getElementById("id_bono");
+
+    const iess = document.getElementById("id_iess");
+    const tot_ing = document.getElementById("id_tot_ing");
+    const tot_des = document.getElementById("id_tot_des");
+    const neto = document.getElementById("id_neto");
+
+    // Función para calcular totales
+    function calcular() {
+        const sueldoVal = parseFloat(sueldo.value) || 0;
+        const horasVal = parseFloat(horas_extras.value) || 0;
+        const bonoVal = parseFloat(bono.value) || 0;
+
+        const totalIngresos = sueldoVal + horasVal + bonoVal;
+        const iessVal = sueldoVal * 0.0945;
+        const totalDescuentos = iessVal;
+        const netoVal = totalIngresos - totalDescuentos;
+
+        tot_ing.value = totalIngresos.toFixed(2);
+        iess.value = iessVal.toFixed(2);
+        tot_des.value = totalDescuentos.toFixed(2);
+        neto.value = netoVal.toFixed(2);
+    }
+
+    // Evento para actualizar sueldo automáticamente al cambiar de empleado
+    empleadoSelect.addEventListener("change", function () {
+        const selectedOption = this.options[this.selectedIndex];
+        const sueldoEmpleado = selectedOption.getAttribute("data-sueldo");
+        if (sueldoEmpleado) {
+            sueldo.value = parseFloat(sueldoEmpleado).toFixed(2);
+            calcular();  // Recalcula los totales si se cambia el sueldo
+        }
+    });
+
+    // Llamada inicial a calcular() para asegurarse que los totales están bien
+    calcular();
+});
+</script>
+
+{% endblock %}

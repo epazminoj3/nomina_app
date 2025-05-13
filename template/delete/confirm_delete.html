@@ -1,0 +1,11 @@
+{% extends "home.html" %}
+{% block content %}
+<div class="container mt-5">
+    <h3 class="text-danger">¿Estás seguro de que deseas eliminar este {{ object_name }} <strong>{{ object }}</strong>?</h3>
+    <form method="post">
+        {% csrf_token %}
+        <a href="{{ cancel_url }}" class="btn btn-secondary">Cancelar</a>
+        <button type="submit" class="btn btn-danger">Eliminar</button>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,266 @@
+{% extends "home.html" %}
+
+{% block title %}Lista de empleados{% endblock %}
+{% block extra_css %}
+<style>
+        body {
+            background-color: #f8f9fa;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        .navbar {
+            background: linear-gradient(135deg, #0d6efd, #0dcaf0);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        .card {
+            border-radius: 10px;
+            box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, #0d6efd, #0b5ed7);
+            border: none;
+            box-shadow: 0 4px 8px rgba(13, 110, 253, 0.25);
+            transition: all 0.3s;
+        }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(13, 110, 253, 0.4);
+        }
+        .btn-success {
+            background: linear-gradient(135deg, #198754, #157347);
+            border: none;
+            box-shadow: 0 4px 8px rgba(25, 135, 84, 0.25);
+            transition: all 0.3s;
+        }
+        .btn-success:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(25, 135, 84, 0.4);
+        }
+        .btn-danger {
+            background: linear-gradient(135deg, #dc3545, #bb2d3b);
+            border: none;
+            box-shadow: 0 4px 8px rgba(220, 53, 69, 0.25);
+            transition: all 0.3s;
+        }
+        .btn-danger:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(220, 53, 69, 0.4);
+        }
+        .table {
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+        }
+        .table thead {
+            background: linear-gradient(135deg, #6c757d, #495057);
+            color: white;
+        }
+        .table tbody tr {
+            transition: background-color 0.3s;
+        }
+        .table tbody tr:hover {
+            background-color: rgba(13, 110, 253, 0.05);
+        }
+        .page-header {
+            position: relative;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+        }
+        .page-header:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(135deg, #0d6efd, #0dcaf0);
+        }
+        .btn-floating {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            text-align: center;
+            font-size: 24px;
+            line-height: 60px;
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            transition: all 0.3s;
+        }
+        .btn-floating:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 16px rgba(0,0,0,0.3);
+        }
+    </style>
+{% endblock %}
+{% block content %}
+    <!-- Contenido principal -->
+    <div class="container">
+        <header class="page-header">
+            <h1 class="display-5 fw-bold text-primary">
+                <i class="fas fa-users me-2"></i>Lista de empleados
+            </h1>
+            <p class="lead text-muted">Listado de empleados disponibles</p>
+        </header>
+        
+        <!-- Formulario de Búsqueda Avanzada -->
+        <form method="GET" class="filter-form mb-4">
+            <div class="row g-3">
+                <div class="col-md-3">
+                    <label for="nombre" class="form-label">Nombre</label>
+                    <input type="text" class="form-control" id="nombre" name="nombre" 
+                           value="{{ request.GET.nombre }}" placeholder="Buscar por nombre...">
+                </div>
+                <div class="col-md-2">
+                    <label for="cedula" class="form-label">Cédula</label>
+                    <input type="text" class="form-control" id="cedula" name="cedula" 
+                           value="{{ request.GET.cedula }}" placeholder="Buscar por cédula...">
+                </div>
+                <div class="col-md-2">
+                    <label for="cargo" class="form-label">Cargo</label>
+                    <select class="form-select" id="cargo" name="cargo">
+                        <option value="">Todos los cargos</option>
+                        {% for cargo in cargos %}
+                        <option value="{{ cargo.descripcion }}" 
+                                {% if request.GET.cargo == cargo.descripcion %}selected{% endif %}>
+                            {{ cargo.descripcion }}
+                        </option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="col-md-2">
+                    <label for="departamento" class="form-label">Departamento</label>
+                    <select class="form-select" id="departamento" name="departamento">
+                        <option value="">Todos</option>
+                        {% for departamento in departamentos %}
+                        <option value="{{ departamento.descripcion }}" 
+                                {% if request.GET.departamento == departamento.descripcion %}selected{% endif %}>
+                            {{ departamento.descripcion }}
+                        </option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="col-md-3 d-flex align-items-end">
+                    <button type="submit" class="btn btn-primary me-2">
+                        <i class="fas fa-search me-1"></i> Buscar
+                    </button>
+                    <a href="{% url 'core:empleado_list' %}" class="btn btn-outline-secondary">
+                        <i class="fas fa-times me-1"></i> Limpiar
+                    </a>
+                </div>
+            </div>
+        </form>
+
+        <!-- Botón para nuevo registro -->
+        <div class="d-flex justify-content-end mb-4">
+            <a class="btn btn-success" href="{% url 'core:empleado_create' %}">
+                <i class="fas fa-plus me-2"></i>Nuevo Empleado
+            </a>
+        </div>
+
+        <!-- Tabla de Empleados -->
+        <div class="card mb-4">
+            <div class="card-body p-0">
+                <div class="table-responsive">
+                    <table class="table table-hover mb-0">
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Nombres</th>
+                                <th scope="col">Cédula</th>
+                                <th scope="col">Dirección</th>
+                                <th scope="col">Sexo</th>
+                                <th scope="col">Sueldo</th>
+                                <th scope="col">Cargo</th>
+                                <th scope="col">Departamento</th>
+                                <th scope="col">Tipo Contrato</th>
+                                <th scope="col" class="text-center">Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for empleado in empleados %}
+                            <tr>
+                                <th scope="row">{{ empleado.id }}</th>
+                                <td>{{ empleado.nombres }}</td>
+                                <td>{{ empleado.cedula }}</td>
+                                <td>{{ empleado.direccion }}</td>
+                                <td>
+                                    {% if empleado.sexo == 'M' %}
+                                        Masculino
+                                    {% else %}
+                                        Femenino
+                                    {% endif %}
+                                </td>
+                                <td>${{ empleado.sueldo }}</td>
+                                <td>{{ empleado.cargo.descripcion }}</td>
+                                <td>{{ empleado.departamento.descripcion }}</td>
+                                <td>{{ empleado.tipo_contrato.descripcion }}</td>
+                                <td class="text-center">
+                                    <a href="{% url 'core:empleado_update' empleado.id %}" class="btn btn-sm btn-primary me-1" title="Editar">
+                                        <i class="fas fa-edit"></i>
+                                    </a>
+                                    <a href="{% url 'core:empleado_delete' empleado.id %}" class="btn btn-sm btn-danger" title="Eliminar">
+                                        <i class="fas fa-trash-alt"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                            {% empty %}
+                            <tr>
+                                <td colspan="10" class="text-center text-muted py-4">
+                                    No se encontraron empleados con los filtros aplicados
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Paginación -->
+        {% if empleados.has_other_pages %}
+        <nav aria-label="Page navigation" class="mb-4">
+            <ul class="pagination justify-content-center">
+                {% if empleados.has_previous %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ empleados.previous_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}" aria-label="Anterior">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+                {% else %}
+                    <li class="page-item disabled">
+                        <span class="page-link" aria-hidden="true">&laquo;</span>
+                    </li>
+                {% endif %}
+
+                {% for i in empleados.paginator.page_range %}
+                    {% if empleados.number == i %}
+                        <li class="page-item active"><span class="page-link">{{ i }}</span></li>
+                    {% else %}
+                        <li class="page-item"><a class="page-link" href="?page={{ i }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">{{ i }}</a></li>
+                    {% endif %}
+                {% endfor %}
+
+                {% if empleados.has_next %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ empleados.next_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}" aria-label="Siguiente">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                {% else %}
+                    <li class="page-item disabled">
+                        <span class="page-link" aria-hidden="true">&raquo;</span>
+                    </li>
+                {% endif %}
+            </ul>
+        </nav>
+        {% endif %}
+    </div>
+{% endblock %}
