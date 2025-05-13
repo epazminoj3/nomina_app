@@ -36,6 +36,11 @@
       font-weight: 700;
       color: var(--primary-color);
       font-size: 1.5rem;
+      background-color: rgb(10, 10, 10);
+      padding: 10px 20px;
+      border-radius: 10px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+
     }
     
     .nav-link {
@@ -43,6 +48,11 @@
       color: var(--dark-color);
       margin: 0 10px;
       transition: all 0.3s ease;
+      padding: 10px 15px;
+      border-radius: 10px;
+      background-color: var(--accent-color);
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+
     }
     
     .nav-link:hover, .nav-link.active {
@@ -61,12 +71,17 @@
       border-radius: 50px;
       font-weight: 500;
       transition: all 0.3s ease;
+      background-color: #215bee;
+      color: white;
+
     }
     
     .btn-primary:hover {
       background-color: transparent;
       color: var(--primary-color);
       border-color: var(--primary-color);
+      color: white;
+
     }
     
     .btn-outline-primary {
@@ -76,6 +91,12 @@
       border-radius: 50px;
       font-weight: 500;
       transition: all 0.3s ease;
+      background-color: #2313d6;
+      color: white;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+
+      
+
     }
     
     .btn-outline-primary:hover {
@@ -449,7 +470,7 @@
               <i class="fas fa-user-md"></i>
             </div>
             <h3 class="stats-number">5,000+</h3>
-            <p class="stats-text">Médicos registrados</p>
+            <p class="stats-text">Personas registradas</p>
           </div>
         </div>
         <div class="col-md-3 col-6 mb-4 mb-md-0">
@@ -458,7 +479,7 @@
               <i class="fas fa-calendar-check"></i>
             </div>
             <h3 class="stats-number">2M+</h3>
-            <p class="stats-text">Citas gestionadas</p>
+            <p class="stats-text">Roles gestionados</p>
           </div>
         </div>
         <div class="col-md-3 col-6">
@@ -467,7 +488,7 @@
               <i class="fas fa-hospital-user"></i>
             </div>
             <h3 class="stats-number">500K+</h3>
-            <p class="stats-text">Pacientes atendidos</p>
+            <p class="stats-text">Personas atendidas</p>
           </div>
         </div>
         <div class="col-md-3 col-6">
@@ -489,232 +510,266 @@
       <div class="row justify-content-center text-center mb-5">
         <div class="col-lg-6">
           <h2 class="fw-bold mb-3">Características principales</h2>
-          <p class="text-muted">Descubra cómo MediConsult Pro puede transformar su práctica médica con funciones diseñadas para profesionales de la salud.</p>
+            <p class="text-muted">Explore cómo TableNominas simplifica la gestión de nóminas, automatizando cálculos, generando reportes y asegurando precisión en los pagos.</p>
         </div>
       </div>
       <div class="row">
         <div class="col-lg-4 col-md-6 mb-4">
           <div class="feature-box">
-            <div class="feature-icon">
-              <i class="fas fa-calendar-alt"></i>
-            </div>
-            <h4 class="feature-title">Gestión de citas</h4>
-            <p>Programe, reprograme y cancele citas con facilidad. Envío automático de recordatorios a pacientes.</p>
+        <div class="feature-icon">
+          <i class="fas fa-table"></i>
+        </div>
+        <h4 class="feature-title">Gestión de tablas</h4>
+        <p>Administre y personalice tablas de nóminas con facilidad. Organice datos de empleados y roles de pago.</p>
           </div>
         </div>
         <div class="col-lg-4 col-md-6 mb-4">
           <div class="feature-box">
-            <div class="feature-icon">
-              <i class="fas fa-file-medical-alt"></i>
-            </div>
-            <h4 class="feature-title">Historial médico digital</h4>
-            <p>Mantenga registros completos de pacientes. Acceda al historial médico, diagnósticos y tratamientos al instante.</p>
+        <div class="feature-icon">
+          <i class="fas fa-user-cog"></i>
+        </div>
+        <h4 class="feature-title">Control de usuarios</h4>
+        <p>Gestione permisos y roles de usuarios para garantizar un acceso seguro y eficiente a la información.</p>
           </div>
         </div>
         <div class="col-lg-4 col-md-6 mb-4">
           <div class="feature-box">
-            <div class="feature-icon">
-              <i class="fas fa-pills"></i>
-            </div>
-            <h4 class="feature-title">Gestión de medicamentos</h4>
-            <p>Emita recetas electrónicas y haga seguimiento de medicamentos prescritos con alertas automáticas.</p>
+        <div class="feature-icon">
+          <i class="fas fa-file-invoice-dollar"></i>
+        </div>
+        <h4 class="feature-title">Cálculo de nóminas</h4>
+        <p>Automatice cálculos de nóminas, deducciones y bonificaciones para mayor precisión y rapidez.</p>
           </div>
         </div>
         <div class="col-lg-4 col-md-6 mb-4">
           <div class="feature-box">
-            <div class="feature-icon">
-              <i class="fas fa-comments"></i>
-            </div>
-            <h4 class="feature-title">Chat médico seguro</h4>
-            <p>Comuníquese con sus pacientes de forma segura y envíe resultados o indicaciones con total confidencialidad.</p>
+        <div class="feature-icon">
+          <i class="fas fa-chart-pie"></i>
+        </div>
+        <h4 class="feature-title">Reportes detallados</h4>
+        <p>Genere reportes personalizados sobre pagos, empleados y departamentos para análisis estratégico.</p>
           </div>
         </div>
         <div class="col-lg-4 col-md-6 mb-4">
           <div class="feature-box">
-            <div class="feature-icon">
-              <i class="fas fa-chart-line"></i>
-            </div>
-            <h4 class="feature-title">Análisis y reportes</h4>
-            <p>Obtenga estadísticas detalladas sobre pacientes, ingresos y tendencias para optimizar su práctica.</p>
+        <div class="feature-icon">
+          <i class="fas fa-clock"></i>
+        </div>
+        <h4 class="feature-title">Optimización de tiempo</h4>
+        <p>Reduzca el tiempo dedicado a tareas administrativas con herramientas automatizadas y eficientes.</p>
           </div>
         </div>
         <div class="col-lg-4 col-md-6 mb-4">
           <div class="feature-box">
-            <div class="feature-icon">
-              <i class="fas fa-lock"></i>
-            </div>
-            <h4 class="feature-title">Seguridad avanzada</h4>
-            <p>Protección de datos conforme a normativas sanitarias con cifrado de extremo a extremo.</p>
+        <div class="feature-icon">
+          <i class="fas fa-shield-alt"></i>
+        </div>
+        <h4 class="feature-title">Seguridad de datos</h4>
+        <p>Proteja la información de empleados y nóminas con sistemas de seguridad avanzados y cifrado.</p>
           </div>
         </div>
       </div>
-    </div>
-  </section>
-
-  <!-- App Interface Section -->
-  <section class="py-5 bg-light">
-    <div class="container">
-      <div class="row align-items-center">
-        <div class="col-lg-6 order-lg-2 mb-4 mb-lg-0">
-          <h2 class="fw-bold mb-4">Interfaz intuitiva y fácil de usar</h2>
-          <p class="mb-4">Nuestra aplicación está diseñada pensando en la eficiencia. Con una interfaz clara e intuitiva, podrá gestionar todas las tareas médicas sin complicaciones.</p>
-          <div class="d-flex mb-3">
-            <div class="me-3 text-primary">
-              <i class="fas fa-check-circle fa-2x"></i>
+        </div>
+      </section>
+      <!-- App Interface Section -->
+      <section class="py-5 bg-light">
+        <div class="container">
+          <div class="row align-items-center">
+            <div class="col-lg-6 order-lg-2 mb-4 mb-lg-0">
+              <h2 class="fw-bold mb-4">Interfaz moderna y eficiente</h2>
+              <p class="mb-4">Nuestra plataforma está diseñada para maximizar la productividad. Con una interfaz moderna y eficiente, podrá realizar todas las gestiones de manera ágil.</p>
+              <div class="d-flex mb-3">
+                <div class="me-3 text-success">
+                  <i class="fas fa-check-circle fa-2x"></i>
+                </div>
+                <div>
+                  <h5>Panel adaptable</h5>
+                  <p class="text-muted">Personalice su experiencia según sus preferencias y necesidades.</p>
+                </div>
+              </div>
+              <div class="d-flex mb-3">
+                <div class="me-3 text-success">
+                  <i class="fas fa-check-circle fa-2x"></i>
+                </div>
+                <div>
+                  <h5>Navegación intuitiva</h5>
+                  <p class="text-muted">Encuentre rápidamente las herramientas que necesita para su trabajo diario.</p>
+                </div>
+              </div>
+              <div class="d-flex">
+                <div class="me-3 text-success">
+                  <i class="fas fa-check-circle fa-2x"></i>
+                </div>
+                <div>
+                  <h5>Acceso multiplataforma</h5>
+                  <p class="text-muted">Utilice la aplicación desde cualquier dispositivo, en cualquier momento.</p>
+                </div>
+              </div>
             </div>
-            <div>
-              <h5>Panel principal personalizable</h5>
-              <p class="text-muted">Adapte la vista según sus necesidades y especialidad médica.</p>
-            </div>
-          </div>
-          <div class="d-flex mb-3">
-            <div class="me-3 text-primary">
-              <i class="fas fa-check-circle fa-2x"></i>
-            </div>
-            <div>
-              <h5>Navegación simplificada</h5>
-              <p class="text-muted">Acceda a todas las funciones con pocos clics para ahorrar tiempo valioso.</p>
-            </div>
-          </div>
-          <div class="d-flex">
-            <div class="me-3 text-primary">
-              <i class="fas fa-check-circle fa-2x"></i>
-            </div>
-            <div>
-              <h5>Compatible con todos los dispositivos</h5>
-              <p class="text-muted">Trabaje desde su computadora, tablet o smartphone sin limitaciones.</p>
+            <div class="col-lg-6 order-lg-1">
+              <img src="/static/img/interfase.jpg" alt="Modern App Interface" class="img-fluid rounded shadow">
             </div>
           </div>
         </div>
-        <div class="col-lg-6 order-lg-1">
-          <img src="/api/placeholder/600/450" alt="App Interface" class="img-fluid rounded shadow">
+      </section>
+      <!-- Testimonials Section -->
+      <section class="py-5">
+        <div class="container"></div>
+          <div class="row justify-content-center text-center mb-5">
+            <div class="col-lg-6">
+              <h2 class="fw-bold mb-3">Testimonios de nuestros clientes</h2>
+              <p class="text-muted">Conozca las experiencias de quienes han confiado en TableNominas para transformar su gestión de nóminas.</p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-lg-4 col-md-6 mb-4">
+              <div class="testimonial">
+                <div class="d-flex align-items-center mb-3">
+                  <img src="/static/img/juan.jpg" alt="Cliente" class="testimonial-img">
+                  <div>
+                    <h5 class="testimonial-author">Juan Pérez</h5>
+                    <p class="testimonial-position">Gerente de Recursos Humanos</p>
+                  </div>
+                </div>
+                <p class="mb-0">"TableNominas ha simplificado enormemente nuestro proceso de nóminas. La precisión y rapidez en los cálculos nos han ahorrado mucho tiempo y esfuerzo."</p>
+              </div>
+            </div>
+            <div class="col-lg-4 col-md-6 mb-4">
+              <div class="testimonial">
+                <div class="d-flex align-items-center mb-3">
+                  <img src="/static/img/maria.jpg" alt="Cliente" class="testimonial-img">
+                  <div>
+                    <h5 class="testimonial-author">María López</h5>
+                    <p class="testimonial-position">Directora Financiera</p>
+                  </div>
+                </div>
+                <p class="mb-0">"La generación de reportes detallados nos ha permitido tomar decisiones estratégicas basadas en datos confiables. Es una herramienta indispensable para nuestra empresa."</p>
+              </div>
+            </div>
+            <div class="col-lg-4 col-md-6 mb-4">
+              <div class="testimonial">
+                <div class="d-flex align-items-center mb-3">
+                  <img src="/static/img/lopes.jpg" alt="Cliente" class="testimonial-img">
+                  <div>
+                    <h5 class="testimonial-author">Carlos Ramírez</h5>
+                    <p class="testimonial-position">CEO</p>
+                  </div>
+                </div>
+                <p class="mb-0">"La seguridad de los datos y la facilidad de uso de TableNominas nos han dado la confianza para gestionar nuestras nóminas de manera eficiente y sin preocupaciones."</p>
+              </div>
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
-  </section>
+      </section>
+      <!-- Pricing Section -->
+      <section class="py-5 bg-light">
+        <div class="container">
+          <div class="row justify-content-center text-center mb-5">
+            <div class="col-lg-6">
+              <h2 class="fw-bold mb-3">Planes flexibles para su negocio</h2>
+              <p class="text-muted">Encuentre el plan perfecto para sus necesidades y comience a optimizar su gestión hoy mismo.</p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-lg-4 col-md-6 mb-4">
+              <div class="card h-100 border-0 shadow">
+                <div class="card-body text-center p-5">
+                  <h5 class="text-uppercase text-muted mb-3">Inicio</h5>
+                  <h2 class="display-4 fw-bold mb-3">$29</h2>
+                  <p class="text-muted mb-4">por mes</p>
+                  <ul class="list-unstyled mb-4">
+                    <li class="mb-3"><i class="fas fa-check text-primary me-2"></i> Hasta 100 empleados</li>
+                    <li class="mb-3"><i class="fas fa-check text-primary me-2"></i> Gestión básica</li>
+                    <li class="mb-3"><i class="fas fa-check text-primary me-2"></i> Reportes estándar</li>
+                    <li class="mb-3 text-muted"><i class="fas fa-times me-2"></i> Soporte prioritario</li>
+                    <li class="mb-3 text-muted"><i class="fas fa-times me-2"></i> Integraciones avanzadas</li>
+                  </ul>
+                  <a href="#" class="btn btn-outline-primary w-100">Seleccionar plan</a>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-4 col-md-6 mb-4">
+              <div class="card h-100 border-0 shadow border-primary" style="transform: scale(1.05);">
+                <div class="card-header bg-primary text-white text-center py-3">
+                  <h6 class="mb-0">Más popular</h6>
+                </div>
+                <div class="card-body text-center p-5">
+                  <h5 class="text-uppercase text-muted mb-3">Avanzado</h5>
+                  <h2 class="display-4 fw-bold mb-3">$79</h2>
+                  <p class="text-muted mb-4">por mes</p>
+                  <ul class="list-unstyled mb-4">
+                    <li class="mb-3"><i class="fas fa-check text-primary me-2"></i> Hasta 500 empleados</li>
+                    <li class="mb-3"><i class="fas fa-check text-primary me-2"></i> Gestión avanzada</li>
+                    <li class="mb-3"><i class="fas fa-check text-primary me-2"></i> Reportes personalizados</li>
+                    <li class="mb-3"><i class="fas fa-check text-primary me-2"></i> Soporte prioritario</li>
+                    <li class="mb-3 text-muted"><i class="fas fa-times me-2"></i> Integraciones avanzadas</li>
+                  </ul>
+                  <a href="#" class="btn btn-primary w-100">Seleccionar plan</a>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-4 col-md-6 mb-4">
+              <div class="card h-100 border-0 shadow">
+                <div class="card-body text-center p-5">
+                  <h5 class="text-uppercase text-muted mb-3">Premium</h5>
+                  <h2 class="display-4 fw-bold mb-3">$149</h2>
+                  <p class="text-muted mb-4">por mes</p>
+                  <ul class="list-unstyled mb-4">
+                    <li class="mb-3"><i class="fas fa-check text-primary me-2"></i> Empleados ilimitados</li>
+                    <li class="mb-3"><i class="fas fa-check text-primary me-2"></i> Gestión completa</li>
+                    <li class="mb-3"><i class="fas fa-check text-primary me-2"></i> Reportes avanzados</li>
+                    <li class="mb-3"><i class="fas fa-check text-primary me-2"></i> Soporte dedicado</li>
+                    <li class="mb-3"><i class="fas fa-check text-primary me-2"></i> Integraciones avanzadas</li>
+                  </ul>
+                  <a href="#" class="btn btn-outline-primary w-100">Seleccionar plan</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
 
-  <!-- Testimonials Section -->
-  <section class="py-5">
-    <div class="container">
-      <div class="row justify-content-center text-center mb-5">
+      <!-- creadores -->
+      <section class="py-5 bg-light">
+        <div class="container">
+          <div class="row justify-content-center text-center mb-5">
         <div class="col-lg-6">
-          <h2 class="fw-bold mb-3">Lo que dicen nuestros usuarios</h2>
-          <p class="text-muted">Descubra por qué miles de profesionales médicos confían en MediConsult Pro para mejorar su práctica diaria.</p>
+          <h2 class="fw-bold mb-4">Creadores de contenido</h2>
+          <p class="text-muted">Conozca a los expertos detrás de nuestra plataforma y su compromiso con la innovación.</p>
         </div>
-      </div>
-      <div class="row">
+          </div>
+          <div class="row">
         <div class="col-lg-4 col-md-6 mb-4">
-          <div class="testimonial">
-            <div class="d-flex align-items-center mb-3">
-              <img src="/api/placeholder/70/70" alt="Doctor" class="testimonial-img">
-              <div>
-                <h5 class="testimonial-author">Dr. Carlos Mendoza</h5>
-                <p class="testimonial-position">Cardiólogo</p>
-              </div>
+          <div class="card h-100 border-0 shadow text-center">
+            <div class="card-body">
+          <h5 class="card-title">Maykel Aroca</h5>
+          <p class="card-text text-muted">Especialista en desarrollo de software y diseño de interfaces.</p>
             </div>
-            <p class="mb-0">"MediConsult Pro ha revolucionado mi consultorio. Ahora puedo dedicar más tiempo a mis pacientes y menos a tareas administrativas. La función de historial médico digital es excepcional."</p>
           </div>
         </div>
         <div class="col-lg-4 col-md-6 mb-4">
-          <div class="testimonial">
-            <div class="d-flex align-items-center mb-3">
-              <img src="/api/placeholder/70/70" alt="Doctor" class="testimonial-img">
-              <div>
-                <h5 class="testimonial-author">Dra. Ana Suárez</h5>
-                <p class="testimonial-position">Pediatra</p>
-              </div>
+          <div class="card h-100 border-0 shadow text-center">
+            <div class="card-body">
+          <h5 class="card-title">Erick Pazmiño</h5>
+          <p class="card-text text-muted">Experto en gestión de proyectos y optimización de procesos.</p>
             </div>
-            <p class="mb-0">"La gestión de citas es impecable y mis pacientes aprecian los recordatorios automáticos. La aplicación móvil me permite verificar información importante incluso fuera del consultorio."</p>
           </div>
         </div>
         <div class="col-lg-4 col-md-6 mb-4">
-          <div class="testimonial">
-            <div class="d-flex align-items-center mb-3">
-              <img src="/api/placeholder/70/70" alt="Doctor" class="testimonial-img">
-              <div>
-                <h5 class="testimonial-author">Dr. Miguel Estévez</h5>
-                <p class="testimonial-position">Traumatólogo</p>
-              </div>
+          <div class="card h-100 border-0 shadow text-center">
+            <div class="card-body">
+          <h5 class="card-title">Justin Sarcos</h5>
+          <p class="card-text text-muted">Ingeniero en seguridad de datos y soluciones empresariales.</p>
             </div>
-            <p class="mb-0">"Los informes analíticos me han permitido comprender mejor el flujo de mi clínica y tomar decisiones basadas en datos. El soporte técnico es excelente y siempre responden rápidamente."</p>
           </div>
         </div>
-      </div>
-    </div>
-  </section>
+                    <div class="text-center mt-4"></div>
+                      <p class="text-muted mb-0">© 2025 <strong>LekyamCorporation</strong>. Todos los derechos reservados.</p>
+                    </div>
+          </div>
+        </div>
+      </section>
 
-  <!-- Pricing Section -->
-  <section class="py-5 bg-light">
-    <div class="container">
-      <div class="row justify-content-center text-center mb-5">
-        <div class="col-lg-6">
-          <h2 class="fw-bold mb-3">Planes flexibles para su práctica</h2>
-          <p class="text-muted">Elija el plan que mejor se adapte a sus necesidades y crezca con nosotros.</p>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-lg-4 col-md-6 mb-4">
-          <div class="card h-100 border-0 shadow">
-            <div class="card-body text-center p-5">
-              <h5 class="text-uppercase text-muted mb-3">Básico</h5>
-              <h2 class="display-4 fw-bold mb-3">$49</h2>
-              <p class="text-muted mb-4">por mes</p>
-              <ul class="list-unstyled mb-4">
-                <li class="mb-3"><i class="fas fa-check text-primary me-2"></i> Hasta 200 pacientes</li>
-                <li class="mb-3"><i class="fas fa-check text-primary me-2"></i> Gestión de citas</li>
-                <li class="mb-3"><i class="fas fa-check text-primary me-2"></i> Historial médico básico</li>
-                <li class="mb-3"><i class="fas fa-check text-primary me-2"></i> Recordatorios por email</li>
-                <li class="mb-3 text-muted"><i class="fas fa-times me-2"></i> Chat médico</li>
-                <li class="mb-3 text-muted"><i class="fas fa-times me-2"></i> Análisis avanzados</li>
-              </ul>
-              <a href="#" class="btn btn-outline-primary w-100">Seleccionar plan</a>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-4 col-md-6 mb-4">
-          <div class="card h-100 border-0 shadow border-primary" style="transform: scale(1.05);">
-            <div class="card-header bg-primary text-white text-center py-3">
-              <h6 class="mb-0">Recomendado</h6>
-            </div>
-            <div class="card-body text-center p-5">
-              <h5 class="text-uppercase text-muted mb-3">Profesional</h5>
-              <h2 class="display-4 fw-bold mb-3">$99</h2>
-              <p class="text-muted mb-4">por mes</p>
-              <ul class="list-unstyled mb-4">
-                <li class="mb-3"><i class="fas fa-check text-primary me-2"></i> Hasta 500 pacientes</li>
-                <li class="mb-3"><i class="fas fa-check text-primary me-2"></i> Gestión de citas</li>
-                <li class="mb-3"><i class="fas fa-check text-primary me-2"></i> Historial médico completo</li>
-                <li class="mb-3"><i class="fas fa-check text-primary me-2"></i> Recordatorios SMS y email</li>
-                <li class="mb-3"><i class="fas fa-check text-primary me-2"></i> Chat médico</li>
-                <li class="mb-3 text-muted"><i class="fas fa-times me-2"></i> Análisis avanzados</li>
-              </ul>
-              <a href="#" class="btn btn-primary w-100">Seleccionar plan</a>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-4 col-md-6 mb-4">
-          <div class="card h-100 border-0 shadow">
-            <div class="card-body text-center p-5">
-              <h5 class="text-uppercase text-muted mb-3">Empresarial</h5>
-              <h2 class="display-4 fw-bold mb-3">$199</h2>
-              <p class="text-muted mb-4">por mes</p>
-              <ul class="list-unstyled mb-4">
-                <li class="mb-3"><i class="fas fa-check text-primary me-2"></i> Pacientes ilimitados</li>
-                <li class="mb-3"><i class="fas fa-check text-primary me-2"></i> Gestión de citas</li>
-                <li class="mb-3"><i class="fas fa-check text-primary me-2"></i> Historial médico completo</li>
-                <li class="mb-3"><i class="fas fa-check text-primary me-2"></i> Recordatorios personalizados</li>
-                <li class="mb-3"><i class="fas fa-check text-primary me-2"></i> Chat médico</li>
-                <li class="mb-3"><i class="fas fa-check text-primary me-2"></i> Análisis avanzados</li>
-              </ul>
-              <a href="#" class="btn btn-outline-primary w-100">Seleccionar plan</a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
- 
-    
   {% endblock content %}
   <script src={% static 'js/bootstrap.min.js' %}> </script>
   <script src={% static 'js/bootstrap.bundle.min.js' %}> </script>
