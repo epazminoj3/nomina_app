@@ -117,6 +117,7 @@
                 </button>
             </div>
         </form>
+
         <!-- Botón para nuevo registro -->
         <div class="d-flex justify-content-end mb-4">
             <a class="btn btn-success"  href={% url 'core:cargo_create' %}>
@@ -153,6 +154,11 @@
         </div>
     </div>
 </div>
+        <div class="d-flex justify-content-end mt-4">
+            <a href="{% url 'core:departamento_list' %}" class="btn btn-primary btn-lg shadow-sm" style="border-radius: 20px; padding: 10px 50px;">
+            <i class="fas fa-arrow-right me-2"></i>Siguiente
+            </a>
+        </div>
 
         <!-- Paginación -->
         {% if cargos.has_other_pages %}
@@ -194,3 +200,4 @@
         {% endif %}
     </div>
 {% endblock %}
+

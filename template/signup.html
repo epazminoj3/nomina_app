@@ -8,153 +8,155 @@
         max-width: 600px;
         margin: 3rem auto;
         padding: 2.5rem;
-        background: white;
-        border-radius: 12px;
-        box-shadow: 0 10px 30px rgba(44, 110, 205, 0.1);
+        background: linear-gradient(135deg, #007bff, #0056b3);
+        border-radius: 15px;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        color: #000000;
     }
     
     .registration-header {
         text-align: center;
         margin-bottom: 2.5rem;
     }
-    
+        
     .registration-header h2 {
-        color: #2c6ecd;
-        font-weight: 700;
+        color: #000000;
+        font-weight: 800;
+        font-size: 2rem;
         margin-bottom: 0.5rem;
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
     }
-    
+        
     .registration-header p {
-        color: #6c757d;
         font-size: 1.1rem;
+    }
+        
+    .form-group label {
+        font-weight: 700;
+        color: #000000;
+        font-size: 1rem;
+        margin-bottom: 0.5rem;
+        display: block;
+    }
+        
+    .form-control {
+        border: none;
+        border-radius: 10px;
+        background-color: #000000;
+        font-size: 1rem;
+        padding: 1rem;
+        transition: box-shadow 0.3s ease, transform 0.2s ease;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+        
+    .form-control:focus {
+        box-shadow: 0 4px 15px rgba(1, 1, 1, 0.5);
+        transform: scale(1.02);
     }
     
     .form-group {
-        margin-bottom: 1.75rem;
-    }
-    
-    .form-group label {
-        display: block;
-        margin-bottom: 0.75rem;
-        font-weight: 600;
-        color: #495057;
-        font-size: 1rem;
-    }
-    
-    .form-control {
-        width: 100%;
-        padding: 0.875rem 1.25rem;
-        border: 1px solid #dee2e6;
-        border-radius: 8px;
-        font-size: 1rem;
-        transition: all 0.3s ease;
-        background-color: #f8f9fa;
-    }
-    
-    .form-control:focus {
-        border-color: #2c6ecd;
-        box-shadow: 0 0 0 0.25rem rgba(44, 110, 205, 0.25);
-        background-color: white;
-    }
-    
-    .btn-register {
-        width: 100%;
+        margin-bottom: 1.5rem;
+        background-color: #edecec;
         padding: 1rem;
-        background: linear-gradient(135deg, #2c6ecd, #19b3b3);
-        color: white;
-        border: none;
-        border-radius: 8px;
-        font-size: 1.1rem;
-        font-weight: 600;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        margin-top: 1rem;
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+
     }
-    
+        
+    .btn-register {
+        background-color: #f0f0ed;
+        color: #333333;
+        font-size: 1.2rem;
+        font-weight: 700;
+        padding: 1rem 2rem;
+        border-radius: 10px;
+        transition: background-color 0.3s ease, transform 0.2s ease;
+        margin-top: 1.5rem;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        
+    }
+        
     .btn-register:hover {
-        background: linear-gradient(135deg, #255db7, #159898);
-        transform: translateY(-2px);
-        box-shadow: 0 5px 15px rgba(44, 110, 205, 0.3);
+        background-color: #f8f8f8;
+        transform: translateY(-3px);
+        
     }
-    
-    .login-link {
-        text-align: center;
-        margin-top: 2rem;
-        color: #6c757d;
-        font-size: 1rem;
-    }
-    
+        
     .login-link a {
-        color: #2c6ecd;
-        font-weight: 600;
+        color: #ffffff;
+        font-weight: 700;
+        font-size: 1rem;
         text-decoration: none;
-        transition: all 0.3s ease;
+        transition: color 0.3s ease;
+        
     }
-    
+        
     .login-link a:hover {
-        color: #19b3b3;
-        text-decoration: underline;
+        color: #ff9900;
     }
-    
+        
     .error-message {
-        color: #e74c3c;
-        font-size: 0.875rem;
+        background-color: rgba(255, 0, 0, 0.1);
+        color: #ff0000;
+        padding: 1rem;
+        border-radius: 10px;
+        font-size: 0.9rem;
         margin-top: 0.5rem;
-        display: flex;
-        align-items: center;
+        box-shadow: 0 4px 10px rgba(255, 0, 0, 0.2);
     }
-    
+        
     .error-message i {
         margin-right: 0.5rem;
+        color: #ff0000;
     }
-    
+        
     .form-icon {
+        color: #005eff;
         position: absolute;
-        left: 1.25rem;
+        left: 1rem;
         top: 50%;
         transform: translateY(-50%);
-        color: #6c757d;
+        
     }
-    
+        
     .input-with-icon {
         position: relative;
     }
-    
+        
     .input-with-icon input {
         padding-left: 3rem;
     }
-    
-    /* Responsive */
+        
     @media (max-width: 767.98px) {
         .registration-container {
-            padding: 1.5rem;
-            margin: 1.5rem auto;
+            padding: 2rem;
         }
         
         .registration-header h2 {
-            font-size: 1.75rem;
+            font-size: 1.8rem;
         }
     }
-.alert {
-    padding: 1rem 1.5rem;
-    border-radius: 8px;
-    margin-bottom: 1.5rem;
-    font-weight: 600;
-    font-size: 1rem;
-}
-
-.alert-success {
-    background-color: #d4edda;
-    color: #155724;
-    border: 1px solid #c3e6cb;
-}
-
-.alert-error, .alert-danger {
-    background-color: #f8d7da;
-    color: #721c24;
-    border: 1px solid #f5c6cb;
-}
-
+        
+    .alert {
+        padding: 1rem;
+        border-radius: 10px;
+        font-size: 1rem;
+        font-weight: 700;
+        margin-bottom: 1rem;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+        
+    .alert-success {
+        background-color: #ffffff;
+        color: #155724;
+        border: 1px solid #c3e6cb;
+    }
+        
+    .alert-error, .alert-danger {
+        background-color: #f8d7da;
+        color: #721c24;
+        border: 1px solid #f5c6cb;
+    }
 </style>
 {% endblock %}
 
@@ -162,6 +164,10 @@
 <div class="registration-container">
     <div class="registration-header">
         <h2><i class="fas fa-user-plus"></i> Crear Cuenta</h2>
+            <div>
+              <img src="/static/img/login.jpg" alt="login-img" class="img-fluid rounded shadow">
+    </div>
+
         <p>Regístrese para acceder al sistema de gestión de nóminas</p>
     </div>
     {% if messages %}

@@ -1,11 +1,136 @@
-{% extends "home.html" %}
+<style>
+    body {
+        font-family: 'Poppins', sans-serif;
+        background: #f0f2f5;
+        margin: 0;
+        padding: 20px 0;
+        display: flex;
+        justify-content: center;
+        background-image: url('/static/img/interfase.jpg');
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+    }
+
+    .container {
+        background: rgba(255, 255, 255, 0.9); /* Fondo blanco con opacidad para que se vea la imagen de fondo */
+        border-radius: 15px;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+        max-width: 280px;
+        width: 80%;
+        padding: 10px;
+        display: flex;
+        flex-direction: column;
+        animation: fadeIn 0.3s ease-in-out;
+        box-sizing: border-box;
+    }
+
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(15px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .warning-section {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .warning-icon {
+        font-size: 2rem;
+        color: #e63946;
+        margin-bottom: 8px;
+    }
+
+    h3 {
+        font-size: 1.1rem;
+        margin-bottom: 8px;
+        color: #1d3557;
+        word-wrap: break-word;
+    }
+
+    .subtitle {
+        font-size: 0.9rem;
+        color: #6c757d;
+    }
+
+    .actions {
+        display: flex;
+        justify-content: center;
+        gap: 12px;
+        margin-top: 15px;
+        flex-wrap: wrap;
+    }
+
+    .btn {
+        padding: 10px 20px;
+        font-size: 0.95rem;
+        border: none;
+        border-radius: 25px;
+        cursor: pointer;
+        transition: 0.3s ease;
+        font-weight: 500;
+    }
+
+    .btn-secondary {
+        background-color: #adb5bd;
+        color: white;
+    }
+
+    .btn-secondary:hover {
+        background-color: #6c757d;
+        transform: scale(1.03);
+    }
+
+    .btn-danger {
+        background-color: #e63946;
+        color: white;
+    }
+
+    .btn-danger:hover {
+        background-color: #d62828;
+        transform: scale(1.03);
+    }
+
+    @media (max-width: 480px) {
+        h3 {
+            font-size: 1rem;
+        }
+
+        .btn {
+            padding: 8px 16px;
+            font-size: 0.9rem;
+        }
+
+        .actions {
+            gap: 10px;
+        }
+    }
+</style>
+
 {% block content %}
-<div class="container mt-5">
-    <h3 class="text-danger">¿Estás seguro de que deseas eliminar este {{ object_name }} <strong>{{ object }}</strong>?</h3>
-    <form method="post">
-        {% csrf_token %}
-        <a href="{{ cancel_url }}" class="btn btn-secondary">Cancelar</a>
-        <button type="submit" class="btn btn-danger">Eliminar</button>
-    </form>
+<div>
+    <div>
+        <img src="/static/img/interfase.jpg" alt="Portada de imagen" style="display: none;">
+    </div>
+    <div class="container">
+        <div class="warning-section">
+            <div class="warning-icon" role="alert">⚠️</div>
+            <h3>¿Estás seguro de que deseas eliminar este cargo <strong>{{ object|default:"[Objeto no especificado]" }}</strong>?</h3>
+            <p class="subtitle">Esta acción es permanente y no se puede deshacer.</p>
+        </div>
+        <form method="post">
+            {% csrf_token %}
+            <div class="actions">
+                <a href="{{ cancel_url|default:"/" }}" class="btn btn-secondary">Cancelar</a>
+                <button type="submit" class="btn btn-danger">Eliminar</button>
+            </div>
+        </form>
+    </div>
 </div>
 {% endblock %}
