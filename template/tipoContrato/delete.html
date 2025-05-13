@@ -1,5 +1,5 @@
 {% extends "home.html" %}
-{% block title %}Tipo de Contrato{% endblock %}
+{% block title %}Desea eliminar el Tipo de Contrato?{% endblock %}
 {% block content %}
 <div class="container">
     <div class="mt-4 border border-2 shadow rounded ">
@@ -15,9 +15,9 @@
         <form method="POST" class="m-4"> 
             {% csrf_token %}
             <div class="d-flex justify-content-center">
-                 <button class="btn btn-outline-success mx-2" type="submit">¿Desea eliminar al Tipo de Contrato?</button>
+                 <button class="btn btn-outline-success mx-2" type="submit">Si</button>
                  <h1 class="fw-bold text-danger text-center ">{{tipoContrato.descripcion}}</h1>
-                  <a class="btn btn-outline-warning ms-2" href="/template/tipoContrato/list.html">Cancelar</a>
+                  <a class="btn btn-outline-warning ms-2" href="{% url 'core:tipoContrato_list' %}">Cancelar</a>
             </div>
          
         </form>

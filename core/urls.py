@@ -9,7 +9,7 @@ from . import views
 
 app_name = 'core'  # Nombre de la aplicación para el espacio de nombres
 urlpatterns = [
-     path('', views.home, name='home'),  # esta línea es la clave
+    path('', views.home, name='home'),  # esta línea es la clave
     path('signup/', views.signup, name='signup'),  # URL for the signup view
     path('logout/', views.signout, name='logout'),  # URL for the logout view
     path('signin/', views.signin, name='signin'),  # URL for the signin view

@@ -141,14 +141,15 @@ def cargo_update(request,id):
 @login_required
 def cargo_delete(request, id):
     cargo = get_object_or_404(Cargo, pk=id)
+    context = {
+        'cargo': cargo,
+        'title': 'Confirmar Eliminación',
+    }
     if request.method == 'POST':
         cargo.delete()
         return redirect('core:cargo_list')
-    return render(request, 'delete/confirm_delete.html', {
-        'object': cargo,
-        'object_name': 'cargo',
-        'cancel_url': reverse('core:cargo_list')
-    })
+    return render(request, 'cargo/delete.html', context)
+
 
 
 @login_required
@@ -214,15 +215,15 @@ def departamento_update(request,id):
 
 @login_required
 def departamento_delete(request, id):
-    depto = get_object_or_404(Departamento, pk=id)
+    departamento = get_object_or_404(Departamento, pk=id)
+    context = {
+        'departamento': departamento,
+        'title': 'Confirmar Eliminación',
+    }
     if request.method == 'POST':
-        depto.delete()
+        departamento.delete()
         return redirect('core:departamento_list')
-    return render(request, 'delete/confirm_delete.html', {
-        'object': depto,
-        'object_name': 'departamento',
-        'cancel_url': reverse('core:departamento_list')
-    })
+    return render(request, 'departamento/delete.html', context)
 
 @login_required
 ## Vista para la lista de Tipos de Contrato
@@ -289,14 +290,16 @@ def tipoContrato_update(request,id):
 @login_required
 def tipoContrato_delete(request, id):
     contrato = get_object_or_404(TipoContrato, pk=id)
+    
+    context = {
+        'title': '¿Desea eliminar el tipo de contrato?',
+        'tipoContrato': contrato,
+    }
     if request.method == 'POST':
         contrato.delete()
         return redirect('core:tipoContrato_list')
-    return render(request, 'delete/confirm_delete.html', {
-        'object': contrato,
-        'object_name': 'tipo de contrato',
-        'cancel_url': reverse('core:tipoContrato_list')
-    })
+
+    return render(request, 'tipocontrato/delete.html', context)
 
 @login_required
 ## Vista para la lista de empleados
@@ -304,9 +307,10 @@ def empleado_list(request):
     query_nombre = request.GET.get('nombre', None)
     query_cedula = request.GET.get('cedula', None)
     query_cargo = request.GET.get('cargo', None)
-    
+    query_departamento = request.GET.get('departamento', None)
+
     empleados_list = Empleado.objects.all().order_by('id')
-    
+
     # Aplicar filtros si existen
     if query_nombre:
         empleados_list = empleados_list.filter(nombre__icontains=query_nombre)
@@ -314,6 +318,9 @@ def empleado_list(request):
         empleados_list = empleados_list.filter(cedula__icontains=query_cedula)
     if query_cargo:
         empleados_list = empleados_list.filter(cargo__descripcion__icontains=query_cargo)
+    if query_departamento:
+        empleados_list = empleados_list.filter(departamento__descripcion__icontains=query_departamento)
+    
     
     # Paginación
     paginator = Paginator(empleados_list, 10)
@@ -374,15 +381,15 @@ def empleado_update(request,id):
 
 @login_required
 def empleado_delete(request, id):
-    emp = get_object_or_404(Empleado, pk=id)
+    empleado = get_object_or_404(Empleado, pk=id)
+    context = {
+        'empleado': empleado,
+        'title': 'Confirmar Eliminación de Empleado',
+    }
     if request.method == 'POST':
-        emp.delete()
+        empleado.delete()
         return redirect('core:empleado_list')
-    return render(request, 'delete/confirm_delete.html', {
-        'object': emp,
-        'object_name': 'empleado',
-        'cancel_url': reverse('core:empleado_list')
-    })
+    return render(request, 'empleado/delete.html', context)
 
 
 @login_required
@@ -465,14 +472,14 @@ def rol_update(request,id):
 @login_required
 def rol_delete(request, id):
     rol = get_object_or_404(Rol, pk=id)
-    if request.method == "POST":
+    context = {
+        'rol': rol,
+        'title': '¿Desea eliminar el rol?',
+    }
+    if request.method == 'POST':
         rol.delete()
         return redirect('core:rol_list')
-    return render(request, 'delete/confirm_delete.html', {
-        'object': rol,
-        'object_name': 'rol',
-        'cancel_url': reverse('core:rol_list')
-    })
+    return render(request, 'rol/delete.html', context)
 
 
 
