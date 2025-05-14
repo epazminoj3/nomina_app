@@ -15,12 +15,10 @@
         text-align: center;
         transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
-
     .login-container:hover {
         transform: translateY(-10px);
         box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
     }
-
     .login-header h2 {
         font-size: 2.5rem;
         font-weight: 800;
@@ -28,19 +26,16 @@
         text-shadow: 2px 2px 5px rgb(0, 0, 255);
         color: white;
     }
-
     .login-container img {
-        margin-bottom: 2rem; /* Added spacing below the image */
+        margin-bottom: 2rem;
         border-radius: 10px;
         max-width: 100%;
         height: auto;
         box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
     }
-
     .form-group {
         margin-bottom: 1.5rem;
     }
-
     .form-group label {
         display: block;
         margin-bottom: 0.5rem;
@@ -51,7 +46,6 @@
         border-radius: 12px;
         padding: 0.3rem;
     }
-
     .form-control {
         width: 100%;
         padding: 1rem;
@@ -63,13 +57,11 @@
         box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.2);
         transition: all 0.3s ease;
     }
-
     .form-control:focus {
         background-color: rgba(255, 255, 255, 0.3);
         box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
         outline: none;
     }
-
     .btn-login {
         width: 100%;
         padding: 1rem;
@@ -84,42 +76,49 @@
         box-shadow: 0 5px 15px rgba(255, 117, 140, 0.3);
         margin-top: 1.5rem;
     }
-
     .btn-login:hover {
         background: linear-gradient(135deg, #ffffff, #000000);
         transform: translateY(-5px);
         box-shadow: 0 10px 25px rgba(255, 117, 140, 0.5);
     }
-
     .btn-login:active {
         transform: translateY(0);
         box-shadow: 0 5px 15px rgba(255, 117, 140, 0.3);
     }
-
     .signup-link {
         margin-top: 2.5rem;
         font-size: 1rem;
         color: #f8f9fa;
     }
-
     .signup-link a {
         color: #080808;
         font-weight: 700;
         text-decoration: none;
         transition: color 0.3s ease;
     }
-
     .signup-link a:hover {
         color: #030303;
         text-decoration: underline;
     }
-
     .error-message {
-        color: #ff4d4d;
-        font-size: 0.9rem;
-        margin-top: 0.5rem;
+        background-color: rgba(255, 0, 0, 0.1);
+        color: #ff0000;
+        padding: 1rem;
+        border-radius: 10px;
+        font-size: 0.95rem;
+        margin: 1rem 0 1.5rem 0;
+        box-shadow: 0 4px 10px rgba(255, 0, 0, 0.15);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        font-weight: 600;
     }
-
+    .error-message i {
+        margin-right: 0.5rem;
+        color: #ff0000;
+        font-size: 1.2rem;
+    }
     .form-icon {
         position: absolute;
         left: 1rem;
@@ -129,16 +128,13 @@
         font-size: 1.5rem;
         transition: color 0.3s ease;
     }
-
     .input-with-icon {
         position: relative;
         margin-bottom: 1.5rem;
     }
-
     .input-with-icon input {
         padding-left: 3rem;
     }
-
     .input-with-icon input:focus + .form-icon {
         color: #ffffff;
     }
@@ -151,8 +147,15 @@
         <h2><i class="fas fa-sign-in-alt"></i> Iniciar Sesión</h2>
     </div>
     <div>
-              <img src="/static/img/login.jpg" alt="login-img" class="img-fluid rounded shadow">
+        <img src="/static/img/login.jpg" alt="login-img" class="img-fluid rounded shadow">
     </div>
+
+    {% if error %}
+        <div class="error-message">
+            <i class="fas fa-exclamation-circle"></i>
+            {{ error }}
+        </div>
+    {% endif %}
 
     <form method="POST" action="{% url 'core:signin' %}">
         {% csrf_token %}
@@ -169,6 +172,7 @@
             </div>
             {% if field.errors %}
                 <div class="error-message">
+                    <i class="fas fa-exclamation-circle"></i>
                     {% for error in field.errors %}
                         {{ error }}
                     {% endfor %}

@@ -14,6 +14,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.db import IntegrityError
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 
 
 
@@ -29,28 +30,26 @@ def home(request):
 def signup(request):
     if request.method == 'GET':
         return render(request, 'signup.html', {
-            'form': UserCreationForm
+            'form': UserCreationForm()
         })
     else:
         if request.POST['password1'] == request.POST['password2']:
-            try:
+            try: 
                 user = User.objects.create_user(
-                    username=request.POST['username'],
+                    username=request.POST['username'], 
                     password=request.POST['password1']
                 )
-                user.save()
                 login(request, user)
-                messages.success(request, '¡Usuario registrado exitosamente!')
-                return redirect('home') 
+                return redirect('home')
             except IntegrityError:
-                messages.error(request, 'El nombre de usuario ya existe. Elige otro.')
+                messages.error(request, 'El usuario ya existe')
                 return render(request, 'signup.html', {
-                    'form': UserCreationForm
+                    'form': UserCreationForm()
                 })
         else:
-            messages.error(request, 'Las contraseñas no coinciden.')
+            messages.error(request, 'Las contraseñas no coinciden')
             return render(request, 'signup.html', {
-                'form': UserCreationForm
+                'form': UserCreationForm()
             })
 
         
