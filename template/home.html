@@ -387,47 +387,81 @@
 </head>
 <body>
   <!-- Navbar -->
-  <nav class="navbar navbar-expand-lg navbar-light bg-white sticky-top">
-    <div class="container">
-      <a class="navbar-brand" href="#">Table<span class="text-secondary">Nominas</span></a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav mx-auto">
-          <li class="nav-item">
-            <a class="nav-link active" href="{% url 'home' %}">Inicio</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{% url 'core:cargo_list' %}">Cargo</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{% url 'core:departamento_list' %}">Departamento</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{% url 'core:tipoContrato_list' %}">Tipo contrato</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{% url 'core:empleado_list' %}">Empleado</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{% url 'core:rol_list' %}">Roles de Pago</a>
-          </li>
-
-
-        </ul>
-        <div class="d-flex">
-          {% if user.is_authenticated %}
-          <a href="{% url 'core:logout' %}" class="btn btn-outline-primary me-2">Cerrar Sesión</a>
-          {% else %}
-          <a href="{% url 'core:signup' %}" class="btn btn-primary">Registrarse</a>
-          <a href="{% url 'core:signin' %}" class="btn btn-outline-primary me-2">Iniciar Sesión</a>
-          {% endif %}
-        </div>
+  <nav class="navbar navbar-expand-lg navbar-dark" style="background: linear-gradient(90deg, #2c6ecd 0%, #19b3b3 100%); box-shadow: 0 4px 20px rgba(44,110,205,0.15);">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center" href="#" style="font-size: 2rem; font-weight: 800;">
+      <i class="fas fa-table me-2" style="color: #fff;"></i>
+      <span style="color: #fff;">Table<span style="color: #ffe082;">Nominas</span></span>
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav mx-auto" style="gap: 0.5rem;">
+        <li class="nav-item">
+          <a class="nav-link {% if request.resolver_match.url_name == 'home' %}active{% endif %}" href="{% url 'home' %}" style="color: #fff;">
+            <i class="fas fa-home me-1"></i>Inicio
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link {% if request.resolver_match.url_name == 'core:cargo_list' %}active{% endif %}" href="{% url 'core:cargo_list' %}" style="color: #fff;">
+            <i class="fas fa-briefcase me-1"></i>Cargo
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link {% if request.resolver_match.url_name == 'core:departamento_list' %}active{% endif %}" href="{% url 'core:departamento_list' %}" style="color: #fff;">
+            <i class="fas fa-building me-1"></i>Departamento
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link {% if request.resolver_match.url_name == 'core:tipoContrato_list' %}active{% endif %}" href="{% url 'core:tipoContrato_list' %}" style="color: #fff;">
+            <i class="fas fa-file-contract me-1"></i>Tipo contrato
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link {% if request.resolver_match.url_name == 'core:empleado_list' %}active{% endif %}" href="{% url 'core:empleado_list' %}" style="color: #fff;">
+            <i class="fas fa-users me-1"></i>Empleado
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link {% if request.resolver_match.url_name == 'core:rol_list' %}active{% endif %}" href="{% url 'core:rol_list' %}" style="color: #fff;">
+            <i class="fas fa-money-check-alt me-1"></i>Roles de Pago
+          </a>
+        </li>
+      </ul>
+      <div class="d-flex align-items-center" style="gap: 0.5rem;">
+        {% if user.is_authenticated %}
+          <span class="text-white me-2" style="font-weight: 500;">
+            <i class="fas fa-user-circle"></i> {{ user.username }}
+          </span>
+          <a href="{% url 'core:logout' %}" class="btn btn-outline-light btn-sm px-4 py-2" style="border-radius: 20px;">
+            <i class="fas fa-sign-out-alt"></i> Cerrar Sesión
+          </a>
+        {% else %}
+          <a href="{% url 'core:signup' %}" class="btn btn-warning btn-sm px-4 py-2" style="border-radius: 20px; font-weight: 600;">
+            <i class="fas fa-user-plus"></i> Registrarse
+          </a>
+          <a href="{% url 'core:signin' %}" class="btn btn-outline-light btn-sm px-4 py-2" style="border-radius: 20px;">
+            <i class="fas fa-sign-in-alt"></i> Iniciar Sesión
+          </a>
+        {% endif %}
       </div>
     </div>
-  </nav>
-
+  </div>
+</nav>
+<style>
+  .navbar-nav .nav-link {
+    background: none !important;
+    border-radius: 0 !important;
+    color: #fff !important;
+    font-weight: 500;
+    transition: color 0.2s;
+  }
+  .navbar-nav .nav-link.active, .navbar-nav .nav-link:hover {
+    color: #ffe082 !important;
+    background: none !important;
+  }
+</style>
   <!-- Seccion de contenido  -->
   {% block content %}
 
@@ -453,8 +487,8 @@
             <a href="{% url 'core:cargo_list' %}" class="btn btn-primary me-3 mb-2">Empezar a crear</a>
             <a href="{% url 'core:rol_list' %}" class="btn btn-outline-primary mb-2">Ver Roles creados</a>
             {% else %}
-           <a href="{% url 'core:rol_list' %}" class="btn btn-primary me-3 mb-2">Comenzar ahora</a>
-            <a href="{% url 'core:rol_list' %}" class="btn btn-outline-primary mb-2">Ver demostración</a>
+           <a href="{% url 'core:rol_list' %}" class="btn btn-primary me-3 mb-2">Registrarse Ahora</a>
+            <a href="{% url 'core:rol_list' %}" class="btn btn-outline-primary mb-2">Iniciar Sesion</a>
             {% endif %}
 
           </div>
@@ -764,7 +798,7 @@
         <div class="col-lg-4 col-md-6 mb-4">
           <div class="card h-100 border-0 shadow text-center">
             <div class="card-body">
-          <h5 class="card-title">Justin Sarcos</h5>
+          <h5 class="card-title">Jostin Sarco</h5>
           <p class="card-text text-muted">Ingeniero en seguridad de datos y soluciones empresariales.</p>
             </div>
           </div>
